@@ -1,24 +1,12 @@
 async function getPhotographers() {
-  let myInit = {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    mode: "cors",
-    cache: "default",
-  };
-
-  let myRequest = new Request("./data/photographers.json", myInit);
-
-  const photographers = [
-    fetch(myRequest)
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        console.log(data);
-      }),
-  ];
+  const photographers = [];
+  fetch("./data/photographers.json")
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (json) {
+      console.log(json.photographers);
+    });
   return { photographers };
 }
 

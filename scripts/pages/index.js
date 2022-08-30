@@ -1,5 +1,7 @@
+// Variable pour afficher les données dans la console
 let userData = [];
 
+// Récupérer les données des photographes en utilisant fetch
 async function getPhotographers() {
   const { photographers } = await fetch("./data/photographers.json")
     .then((response) => response.json())
@@ -8,6 +10,7 @@ async function getPhotographers() {
   return { photographers };
 }
 
+// Affichage des données des photographes
 async function displayData(photographers) {
   const photographersSection = document.querySelector(".photographer_section");
 

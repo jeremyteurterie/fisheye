@@ -1,8 +1,10 @@
+let userData = [];
+
 async function getPhotographers() {
-  const photographers = [];
-  fetch("./data/photographers.json")
+  const { photographers } = await fetch("./data/photographers.json")
     .then((response) => response.json())
-    .then((data) => console.log(data));
+    .then((data) => (userData = data));
+  console.log(userData);
   return { photographers };
 }
 
@@ -11,7 +13,7 @@ async function displayData(photographers) {
 
   photographers.forEach((photographer) => {
     const photographerModel = photographerFactory(photographer);
-    const userCardDOM = photographerCard.getUserCardDOM();
+    const userCardDOM = photographerModel.getUserCardDOM();
     photographersSection.appendChild(userCardDOM);
   });
 }

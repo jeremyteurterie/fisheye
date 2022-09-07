@@ -31,19 +31,45 @@ h1 {
 }
 
 .photographer_section article {
-  justify-self: center;
   display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  align-content: flex-start;
 }
 
 .photographer_section article h2 {
+  text-align: center;
   color: #d3573c;
-  font-size: 36px;
+  font-size: 24px;
+  margin: 5px;
+}
+
+.photographer_section article h3 {
+  text-align: center;
+  color: darkred;
+  font-size: 12px;
+  margin: 2px;
+}
+
+.photographer_section article h4 {
+  text-align: center;
+  color: black;
+  font-size: 8px;
+  margin: 2px;
+}
+
+.photographer_section article h5 {
+  text-align: center;
+  color: gray;
+  font-size: 7px;
+  margin: 2px;
 }
 
 .photographer_section article img {
   height: 200px;
   width: 200px;
+  object-fit: cover;
+  border-radius: 50%;
 }

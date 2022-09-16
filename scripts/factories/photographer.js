@@ -44,6 +44,31 @@ function photographerFactory(data) {
     const tag = document.createElement("h4");
     const modal = document.createElement("button");
     const image = document.createElement("img");
+    const icon = `assets/icons/heart.png`;
+
+    // Encart likes + prix des pages photographes.
+    const photographer_footer = document.createElement("div");
+    photographer_footer.setAttribute("class", "photographer_footer");
+
+    const photographer_footer_likes = document.createElement("div");
+    photographer_footer_likes.setAttribute(
+      "class",
+      "photographer_footer_likes"
+    );
+    photographer_footer_likes.textContent = 200000;
+
+    const photographer_footer_icon = document.createElement("img");
+    photographer_footer_icon.setAttribute("src", icon);
+    photographer_footer_icon.setAttribute("alt", "heart icon");
+    photographer_footer_icon.setAttribute("class", "photographer_footer_icon");
+
+    const photographer_footer_price = document.createElement("p");
+    photographer_footer_price.textContent = `${price}€ / jour`;
+    photographer_footer_price.setAttribute(
+      "class",
+      "photographerPrice--profile photographer_footer_price"
+    );
+    photographer_footer_price.setAttribute("lang", "fr");
 
     identity.setAttribute("class", "photographer_header");
 
@@ -69,6 +94,13 @@ function photographerFactory(data) {
     identity.appendChild(div);
     identity.appendChild(modal);
     identity.appendChild(image);
+    identity.appendChild(photographer_footer);
+
+    photographer_footer.append(
+      photographer_footer_likes,
+      photographer_footer_icon,
+      photographer_footer_price
+    );
 
     div.appendChild(nom);
     div.appendChild(location);

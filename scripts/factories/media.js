@@ -7,7 +7,6 @@ function mediaFactory(mediaData) {
   function getUserMedia() {
     const div = document.createElement("div");
     const h2 = document.createElement("h2");
-    const h3 = document.createElement("h3");
     const h4 = document.createElement("h4");
 
     div.setAttribute("class", "photographmedia_container");

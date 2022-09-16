@@ -13,14 +13,20 @@ function photographerFactory(data) {
     const link = document.createElement("a");
 
     img.setAttribute("src", picture);
+
     h2.textContent = name;
+
     h3.textContent = `${city}, ${country}`;
+
     h4.textContent = `${tagline}`;
+
     h5.textContent = `${price}€/jour`;
+
     link.setAttribute("aria-label", `${name}`);
     link.setAttribute("href", `photographer.html?id=${id}`);
 
     link.appendChild(article);
+
     article.appendChild(img);
     article.appendChild(h2);
     article.appendChild(h3);
@@ -30,42 +36,48 @@ function photographerFactory(data) {
     return article, link;
   }
 
-  function getPhotographProfil() {
-    //
+  function getPhotographerProfil() {
+    const identity = document.createElement("article");
     const div = document.createElement("div");
     const nom = document.createElement("h2");
     const location = document.createElement("h3");
     const tag = document.createElement("h4");
+    const modal = document.createElement("button");
     const image = document.createElement("img");
-    const prix = document.createElement("h5");
 
-    div.setAttribute("class", "photograph_container");
-    //
-    nom.setAttribute("class", "photograph_name");
+    identity.setAttribute("class", "photographer_header");
+
+    div.setAttribute("class", "photographer_identity");
+
+    nom.setAttribute("class", "photographer_name");
     nom.textContent = `${name}`;
-    //
-    location.setAttribute("class", "photograph_location");
-    location.textContent = `${city}, ${country}`;
-    //
-    tag.setAttribute("class", "photograph_tag");
-    tag.textContent = `${tagline}`;
-    //
-    image.setAttribute("class", "photograph_image");
+
+    image.setAttribute("class", "photographer_picture");
+    image.setAttribute("alt", `${name}`);
     image.setAttribute("src", `assets/photographers/${portrait}`);
+
+    location.setAttribute("class", "photographer_location");
+    location.textContent = `${city}, ${country}`;
+
+    tag.setAttribute("class", "photographer_tag");
+    tag.textContent = tagline;
+
+    modal.setAttribute("class", "photographer_modal");
+    modal.textContent = "Contactez-moi";
+
     //
-    prix.setAttribute("class", "photograph_price");
-    prix.textContent = `${price}€/jour`;
-    //
-    div.appendChild(image);
+    identity.appendChild(div);
+    identity.appendChild(modal);
+    identity.appendChild(image);
+
     div.appendChild(nom);
     div.appendChild(location);
     div.appendChild(tag);
-    div.appendChild(prix);
 
-    return div;
+    return identity;
   }
   return {
     getUserCardDOM,
-    getPhotographProfil,
+    getPhotographerProfil,
   };
 }

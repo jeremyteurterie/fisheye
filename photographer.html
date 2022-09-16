@@ -18,19 +18,48 @@
 
     <section id="photographeInfos"></section>
 
-    <div id="contact_modal">
+    <div
+      id="contact_modal"
+      role="dialog"
+      aria-label="Contact form"
+      aria-hidden="true"
+      tabindex="-1"
+      aria-describedby="modalTitle"
+    >
       <div class="modal">
-        <header>
-          <h2>Contactez-moi</h2>
-
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
-        <form>
-          <div>
-            <label>Prénom</label>
-            <input />
+        <header class="modal__header" aria-labelledby="modalTitle">
+          <div class="modal__header__text">
+            <h2 id="modalTitle" class="modal__header__text__heading" lang="fr">
+              Contactez-moi
+            </h2>
           </div>
-          <button class="contact_button">Envoyer</button>
+          <button id="closeModal" class="button">
+            <img
+              class="modal__header__img"
+              src="assets/icons/close.svg"
+              alt="Close the form modal"
+            />
+          </button>
+        </header>
+        <form
+          id="form"
+          name="contact"
+          action="photographer.html"
+          method="get"
+          onsubmit="return validate();"
+        >
+          <div>
+            <label for="first" lang="fr">Prénom</label>
+            <input type="text" id="first" name="first" minlength="2" required />
+            <label for="last" lang="fr">Nom</label>
+            <input type="text" id="last" name="last" minlength="2" required />
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required />
+            <label for="textarea" lang="fr">Votre Message</label>
+            <textarea type="text" id="textarea" name="textarea" required>
+            </textarea>
+          </div>
+          <button class="button button--form" lang="fr">Envoyer</button>
         </form>
       </div>
     </div>

@@ -42,9 +42,9 @@ function photographerFactory(data) {
     const nom = document.createElement("h2");
     const location = document.createElement("h3");
     const tag = document.createElement("h4");
-    const modal = document.createElement("button");
     const image = document.createElement("img");
     const icon = `assets/icons/heart.png`;
+    /*const modalButton = document.createElement("button");*/
 
     // Encart likes + prix des pages photographes.
     const photographer_footer = document.createElement("div");
@@ -87,12 +87,12 @@ function photographerFactory(data) {
     tag.setAttribute("class", "photographer_tag");
     tag.textContent = tagline;
 
-    modal.setAttribute("class", "photographer_modal");
-    modal.textContent = "Contactez-moi";
+    /*modalButton.setAttribute("class", "photographer_modal");
+    modalButton.textContent = "Contactez-moi";*/
 
     //
     identity.appendChild(div);
-    identity.appendChild(modal);
+    /*identity.appendChild(modalButton);*/
     identity.appendChild(image);
     identity.appendChild(photographer_footer);
 

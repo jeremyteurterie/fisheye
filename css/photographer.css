@@ -58,7 +58,7 @@ form {
 }
 
 form label {
-  color: #312e2e;
+  color: $gray--dark;
   font-size: 36px;
 }
 
@@ -70,11 +70,13 @@ form div {
   margin-bottom: 26px;
 }
 
-form input {
+form input,
+form textarea {
   width: 100%;
   height: 68px;
   border: none;
   border-radius: 5px;
+  font-size: 36px;
 }
 
 /* BANNER PHOTOGRAPHER */
@@ -271,11 +273,52 @@ nav > ul > li:hover > a {
 
 /* MEDIA */
 
-.photographmedia_image {
+.media_container {
+  align-items: center;
+  color: #901c1c;
+}
+
+.media_image {
   width: 350px;
   height: 300px;
   object-fit: cover;
   border-radius: 1%;
+}
+
+.media_likescontainer {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+
+.media_description {
+  display: flex;
+  justify-content: space-between;
+  width: 350px;
+  font-size: smaller;
+}
+
+.media_description img {
+  width: 20px;
+}
+
+.media_likes {
+  padding-bottom: 4px;
+}
+
+.media_title {
+  padding-bottom: 5px;
+}
+
+.media_likesbutton {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.media_likesbuttonimage {
+  filter: invert(19%) sepia(21%) saturate(6453%) hue-rotate(341deg)
+    brightness(94%) contrast(100%);
 }
 
 .photographer_media {

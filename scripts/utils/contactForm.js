@@ -20,6 +20,21 @@ function closeModal() {
   modal.style.display = "none";
 }
 
+/*const addGlobalEventListener = (type, selector, callback, options) => {
+  document.addEventListener(
+    type,
+    (event) => {
+      if (event.target.matches(selector)) callback(event);
+    },
+    options
+  );
+};
+
+addGlobalEventListener("click", "#displayModal", (event) => {
+  console.log("Clicked Button");
+  displayModal(event);
+});$
+
 // Launch modal event
 Array.from(modalButton).forEach((btn) =>
   btn.addEventListener("click", displayModal)
@@ -27,7 +42,7 @@ Array.from(modalButton).forEach((btn) =>
 console.log(modalButton);
 
 // Close modal event
-modalClose.addEventListener("click", closeModal);
+modalClose.addEventListener("click", closeModal);*/
 
 // Fontions pour vérifier si les champs sont correctes
 function checkFirst() {
@@ -76,17 +91,5 @@ function checkTextArea() {
   } else {
     textArea.style.backgroundColor = "red";
     return false;
-  }
-}
-
-// Fonction pour valider le formulaire
-function formValidation() {
-  if (checkFirst && checkLast && checkEmail && checkTextArea) {
-    closeModal();
-    form.reset();
-    console.log("The form is valid.");
-  }
-  {
-    console.log("The form is NOT valid.");
   }
 }

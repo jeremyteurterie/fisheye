@@ -88,6 +88,7 @@ function photographerFactory(data) {
     tag.textContent = tagline;
 
     modalButton.setAttribute("class", "photographer_modal");
+    modalButton.setAttribute("id", "displayModal");
     modalButton.textContent = "Contactez-moi";
 
     //
@@ -108,6 +109,7 @@ function photographerFactory(data) {
 
     return identity;
   }
+
   return {
     getUserCardDOM,
     getPhotographerProfil,

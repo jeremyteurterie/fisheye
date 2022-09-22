@@ -3,48 +3,96 @@ function mediaFactory(mediaData) {
 
   const mediaImage = `assets/photographers/medias/${image}`;
   const mediaVideo = `assets/photographers/medias/${video}`;
+  const like = `${likes}`;
 
   function getUserMedia() {
-    const div = document.createElement("div");
-    const h2 = document.createElement("h2");
-    const h4 = document.createElement("h4");
+    const mediaContainer = document.createElement("div");
+    const mediaDescription = document.createElement("p");
+    const mediaTitle = document.createElement("h2");
+    const mediaLikes = document.createElement("h3");
+    const mediaPrice = document.createElement("h4");
+    const mediaLikesButton = document.createElement("button");
+    const mediaLikesButtonImage = document.createElement("img");
+    const icon = `assets/icons/heart.svg`;
+    const mediaLikesContainer = document.createElement("div");
 
-    div.setAttribute("class", "photographmedia_container");
+    mediaContainer.setAttribute("class", "media_container");
 
     // Pop method for media
     // In MP4 case
     if (mediaVideo.split(".").pop() == "mp4") {
       const video = document.createElement("video");
       video.setAttribute("controls", "");
-      video.setAttribute("class", "photographmedia_image");
+      video.setAttribute("class", "media_image");
       video.setAttribute("src", mediaVideo);
       const source = document.createElement("source");
       source.setAttribute("src", mediaVideo);
       source.setAttribute("type", "video/mp4");
 
-      div.appendChild(video);
+      mediaContainer.append(video, mediaDescription);
       video.appendChild(source);
     }
     // In JPG case
     if (mediaImage.split(".").pop() == "jpg") {
       const image = document.createElement("img");
-      image.setAttribute("class", "photographmedia_image");
+      image.setAttribute("class", "media_image");
       image.setAttribute("src", mediaImage);
 
-      div.appendChild(image);
+      mediaContainer.append(image, mediaDescription);
     }
     //
-    h2.setAttribute("class", "photographmedia_description");
-    h2.textContent = `${title} ${likes}`;
+    mediaDescription.setAttribute("class", "media_description");
     //
-    h4.setAttribute("class", "photographmedia_name");
-    h4.textContent = `${price}€/jour`;
+    mediaTitle.setAttribute("class", "media_title");
+    mediaTitle.textContent = `${title}`;
+    //
+    mediaLikesContainer.setAttribute("class", "media_likescontainer");
+    //
+    mediaLikes.setAttribute("class", "media_likes");
+    mediaLikes.textContent = `${likes}`;
+    //
+    mediaLikesButton.setAttribute("class", "media_likesbutton");
+    mediaLikesButton.setAttribute("type", "button");
+    //
+    mediaLikesButtonImage.setAttribute("class", "media_likesbuttonimage");
+    mediaLikesButtonImage.setAttribute("src", icon);
+    //
+    mediaPrice.setAttribute("class", "media_price");
+    mediaPrice.textContent = `${price}€/jour`;
 
     console.log(video);
     //
-    div.appendChild(h2);
+    mediaDescription.append(mediaTitle, mediaLikes, mediaLikesContainer);
+    mediaLikesContainer.append(
+      mediaLikes,
+      mediaLikesButton,
+      mediaLikesButtonImage
+    );
+    mediaLikesButton.appendChild(mediaLikesButtonImage);
 
-    return div;
+    // Ajout d'un like pour chaque média lorsque l'utilisateur clique sur le bouton
+    function addLike() {
+      let count = like;
+      count++;
+      mediaLikes.innerText = count;
+      return count;
+    }
+
+    mediaLikesButton.addEventListener("click", addLike);
+
+    function addLikeTotal() {
+      const photographer_footer = document.getElementById("totalLikes");
+      let totalLikesCount = photographer_footer.innerText;
+      totalLikesCount++;
+      photographer_footer.innerText = totalLikesCount;
+      mediaLikesButton.removeEventListener("click", addLikeTotal);
+      return totalLikesCount;
+    }
+
+    mediaLikesButton.addEventListener("click", addLikeTotal);
+
+    return mediaContainer;
   }
+
   return { getUserMedia };
 }

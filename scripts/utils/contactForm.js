@@ -1,95 +1,119 @@
-// DOM Elements
-const form = document.getElementById("form");
-const modal = document.getElementById("contact_modal");
-const modalButton = document.getElementsByClassName("modalbutton");
-const modalClose = document.getElementById("closeModal");
-const btnSubmit = document.querySelector(".btn-submit");
-const first = document.getElementById("first");
-const last = document.getElementById("last");
-const email = document.getElementById("email");
-const textArea = document.getElementById("textarea");
-const regexName = /^(?=.{2,50}$)[a-z]+(?:['_.\s][a-z]+)*$/i;
-const regexEmail =
-  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const form = document.querySelector("form");
+const inputs = document.querySelectorAll(
+  'input[type="text"], input[type="email"]'
+);
 
-function displayModal() {
-  modal.style.display = "block";
-}
+let first, last, email, textarea, confirmChecker;
 
-function closeModal() {
-  modal.style.display = "none";
-}
+console.log(inputs);
 
-/*const addGlobalEventListener = (type, selector, callback, options) => {
-  document.addEventListener(
-    type,
-    (event) => {
-      if (event.target.matches(selector)) callback(event);
-    },
-    options
-  );
+// Gestion des messages d'erreurs
+const errorDisplay = (tag, message, valid) => {
+  const container = document.querySelector("." + tag + "-container");
+  const span = document.querySelector("." + tag + "-container > span");
+
+  if (!valid) {
+    container.classList.add("error");
+    span.textContent = message;
+  } else {
+    container.classList.remove("error");
+    span.textContent = message;
+  }
 };
 
-addGlobalEventListener("click", "#displayModal", (event) => {
-  console.log("Clicked Button");
-  displayModal(event);
-});$
-
-// Launch modal event
-Array.from(modalButton).forEach((btn) =>
-  btn.addEventListener("click", displayModal)
-);
-console.log(modalButton);
-
-// Close modal event
-modalClose.addEventListener("click", closeModal);*/
-
-// Fontions pour vérifier si les champs sont correctes
-function checkFirst() {
-  console.log(first.value);
-  if (
-    !first.value == null ||
-    first.value.trim().match(regexName) ||
-    !first.value.length < 2
-  ) {
-    return true;
+// Vérification des inputs
+const firstChecker = (value) => {
+  console.log(value);
+  if (value.length > 0 && (value.length < 3 || value.length > 20)) {
+    errorDisplay("first", "Le pseudo doit faire entre 3 et 20 caractères");
+  } else if (!value.match(/^[a-zA-Z0-9_.-]*$/)) {
+    errorDisplay(
+      "first",
+      "Le prénom ne doit pas contenir de caractères spéciaux"
+    );
+    pseudo = null;
   } else {
-    first.style.borderColor = "red";
-    first.style.borderWidth = "50px";
-    return false;
+    errorDisplay("first", "", true);
+    first = value;
   }
-}
+};
 
-function checkLast() {
-  console.log(last.value);
-  if (
-    !last.value == null ||
-    last.value.trim().match(regexName) ||
-    !last.value.length < 2
-  ) {
-    return true;
+const lastChecker = (value) => {
+  console.log(value);
+  if (value.length > 0 && (value.length < 3 || value.length > 20)) {
+    errorDisplay("last", "Le pseudo doit faire entre 3 et 20 caractères");
+    pseudo = null;
+  } else if (!value.match(/^[a-zA-Z0-9_.-]*$/)) {
+    errorDisplay("last", "Le nom ne doit pas contenir de caractères spéciaux");
+    pseudo = null;
   } else {
-    last.style.backgroundColor = "red";
-    return false;
+    errorDisplay("last", "", true);
+    last = value;
   }
-}
+};
 
-function checkEmail() {
-  console.log(email.value);
-  if (email.value.trim().match(regexEmail)) {
-    return true;
+const emailChecker = (value) => {
+  console.log(value);
+  if (!value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+    errorDisplay("email", "Le mail n'est pas valide");
+    email = null;
   } else {
-    email.style.backgroundColor = "red";
-    return false;
+    errorDisplay("email", "", true);
+    email = true;
   }
-}
+};
 
-function checkTextArea() {
-  console.log(textArea.value);
-  if (!textArea.value == null) {
-    return true;
+const textareaChecker = (value) => {
+  console.log(value);
+  if (value.length === 0) {
+    errorDisplay("textarea", "Le message ne peut pas être vide");
+    textarea = null;
   } else {
-    textArea.style.backgroundColor = "red";
-    return false;
+    errorDisplay("textarea", "", true);
+    textarea = value;
   }
-}
+};
+
+inputs.forEach((input) => {
+  input.addEventListener("input", (e) => {
+    switch (e.target.id) {
+      case "first":
+        firstChecker(e.target.value);
+        break;
+      case "last":
+        lastChecker(e.target.value);
+        break;
+      case "email":
+        emailChecker(e.target.value);
+        break;
+      case "textarea":
+        textareaChecker(e.target.value);
+        break;
+      default:
+        nul;
+    }
+  });
+});
+
+// Fonction pour vérifier l'envoi du formulaire
+form.addEventListener("submit", (e) => {
+  console.log("test");
+  if (first && last && email && textarea) {
+    const data = {
+      first,
+      last,
+      email,
+      textarea,
+    };
+    console.log(data);
+
+    inputs.forEach((input) => (input.value = ""));
+
+    first = null;
+    last = null;
+    email = null;
+    alert("Inscription validé !");
+  } else {
+    alert("Veuillez remplir correctement les champs");
+  }
+});

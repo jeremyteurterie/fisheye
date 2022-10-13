@@ -14,7 +14,7 @@ function photographerFactory(data) {
 
     img.setAttribute("src", picture);
 
-    h2.textContent = name;
+    h2.textContent = `${name}`;
 
     h3.textContent = `${city}, ${country}`;
 

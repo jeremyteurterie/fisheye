@@ -1,11 +1,33 @@
 const form = document.querySelector("form");
+const modalBg = document.getElementById("contact_modal");
+const modalBtn = document.getElementById("displayModal");
+const closeModalBtn = document.getElementById("closeModal");
 const inputs = document.querySelectorAll(
   'input[type="text"], input[type="email"]'
 );
 
-let first, last, email, textarea, confirmChecker;
+let first, last, email, textarea;
 
 console.log(inputs);
+
+const addGlobalEventListener = (type, selector, callback, options) => {
+  document.addEventListener(
+    type,
+    (event) => {
+      if (event.target.matches(selector)) callback(event);
+    },
+    options
+  );
+};
+
+addGlobalEventListener("click", "#displayModal", (event) => {
+  console.log("Clicked Button");
+  displayModal(event);
+});
+
+function displayModal() {
+  modalBg.style.display = "block";
+}
 
 // Gestion des messages d'erreurs
 const errorDisplay = (tag, message, valid) => {
@@ -117,3 +139,9 @@ form.addEventListener("submit", (e) => {
     alert("Veuillez remplir correctement les champs");
   }
 });
+
+function closeModal() {
+  modalBg.style.display = "none";
+}
+
+// closeModalBtn.addEventListener("click", closeModal);

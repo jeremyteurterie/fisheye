@@ -74,6 +74,7 @@ function mediaFactory(mediaData) {
       let count = like;
       count++;
       mediaLikes.innerText = count;
+      totalLike.innerText = parseInt(totalLike.innerText) + 1; // Ajout d'un like dans la bannière totale
       return count;
     }
 

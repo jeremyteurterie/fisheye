@@ -55,6 +55,7 @@ function photographerFactory(data) {
       "class",
       "photographer_footer_likes"
     );
+    photographer_footer_likes.setAttribute("id", "totalLike");
 
     const photographer_footer_icon = document.createElement("img");
     photographer_footer_icon.setAttribute("src", icon);

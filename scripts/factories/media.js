@@ -60,7 +60,6 @@ function mediaFactory(mediaData) {
     mediaPrice.setAttribute("class", "media_price");
     mediaPrice.textContent = `${price}€/jour`;
 
-    console.log(video);
     //
     mediaDescription.append(mediaTitle, mediaLikes, mediaLikesContainer);
     mediaLikesContainer.append(
@@ -71,25 +70,32 @@ function mediaFactory(mediaData) {
     mediaLikesButton.appendChild(mediaLikesButtonImage);
 
     // Ajout d'un like pour chaque média lorsque l'utilisateur clique sur le bouton
-    function addLike() {
+    function increaseLikes() {
       let count = like;
       count++;
       mediaLikes.innerText = count;
       return count;
     }
 
-    mediaLikesButton.addEventListener("click", addLike);
+    mediaLikesButton.addEventListener("click", increaseLikes);
 
-    function addLikeTotal() {
-      const photographer_footer = document.getElementById("totalLikes");
-      let totalLikesCount = photographer_footer.innerText;
-      totalLikesCount++;
-      photographer_footer.innerText = totalLikesCount;
-      mediaLikesButton.removeEventListener("click", addLikeTotal);
-      return totalLikesCount;
-    }
+    // Affichage totale des likes
+    // const sumall = mediaData
+    //   .likes((item) => item.likes)
+    //   .reduce((prev, curr) => prev + curr, 0);
+    // console.log(sumall);
+    // function totalLikes() {
+    //   let totalLike = 0;
+    //   totalLike += mediaData.likes;
+    //   console.log(totalLike);
+    //   return totalLike;
+    // }
 
-    mediaLikesButton.addEventListener("click", addLikeTotal);
+    // const totalmediaLikes = mediaData.likes.map((mediaData) => {
+    //   let totalLike = 0;
+    //   totalLike += mediaData.likes;
+    //   console.log(totalLike);
+    // });
 
     return mediaContainer;
   }

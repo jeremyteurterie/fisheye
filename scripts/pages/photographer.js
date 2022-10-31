@@ -43,6 +43,14 @@ function displayDataMedia(medias) {
     const displaymedia = mediaModel.getUserMedia();
     mediaslist.appendChild(displaymedia);
   });
+
+  // Affichage du total des likes
+  let totalLike = 0;
+
+  const displaylikes = medias.map((media) => {
+    totalLike += media.likes;
+    document.querySelector("#totalLike").innerHTML = totalLike;
+  });
 }
 
 init();

@@ -14,8 +14,10 @@
     <header>
       <img src="assets/images/logo.png" class="logo" />
     </header>
+    
     <section id="photographeInfos"></section>
-    <div id="contact_modal">
+
+    <div id="contact_modal" aria-hidden="true">
       <div class="modal">
         <header>
           <h2>Contactez-moi</h2>
@@ -69,6 +71,7 @@
         </form>
       </div>
     </div>
+
     <div class="select-filter">
       <span> Trier par </span>
       <select>
@@ -77,10 +80,22 @@
         <option value="title" selected>Titre</option>
       </select>
     </div>
+
+    <div id="lightbox" class="lightbox show" aria-hidden="true" role=”dialog” aria-describedby="lightbox">
+      <span class="lightbox_close">&times;</span>
+      <div class="lightbox_content">
+        <img src="" alt="">
+      </div>
+    </div>
+
     <div class="photographer_media"></div>
+
   </body>
   <script src="scripts/pages/photographer.js"></script>
   <script src="scripts/factories/media.js"></script>
   <script src="scripts/factories/photographer.js"></script>
   <script src="scripts/utils/contactform.js"></script>
+  <script src="scripts/utils/likes.js"></script>
+  <script src="/scripts/utils/lightBox.js"></script>
+  <script src="/scripts/utils/filters.js"></script>
 </html>

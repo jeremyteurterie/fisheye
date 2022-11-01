@@ -72,16 +72,30 @@
       </div>
     </div>
 
-    <div class="select-filter">
-      <span> Trier par </span>
-      <select>
-        <option value="popularite" selected>Popularité</option>
-        <option value="date" selected>Date</option>
-        <option value="title" selected>Titre</option>
-      </select>
-    </div>
+<div
+role="search"
+aria-hidden="false"
+class="sort select-filter"
+aria-label="Menu pour trier photos"
+>
+<div class="sort-choice"></div>
+<span> Trier par </span>
+<select
+  name="sorter"
+  id="sort-choice"
+  onchange="mediasSort(this.value)"
+>
+  <option value="popularite" aria-label="Tri popularité">
+    Popularité
+  </option>
+  <option disabled="disabled">────────</option>
+  <option value="date" aria-label="Tri date publication">Date</option>
+  <option disabled="disabled">────────</option>
+  <option value="title" aria-label="Tri alphabétique">Titre</option>
+</select>
+</div>
 
-    <div id="lightbox" class="lightbox show" aria-hidden="true" role=”dialog” aria-describedby="lightbox">
+    <div id="lightbox" class="lightbox" aria-hidden="true" role=”dialog” aria-describedby="lightbox">
       <span class="lightbox_close">&times;</span>
       <div class="lightbox_content">
         <img src="" alt="">
@@ -97,5 +111,4 @@
   <script src="scripts/utils/contactform.js"></script>
   <script src="scripts/utils/likes.js"></script>
   <script src="/scripts/utils/lightBox.js"></script>
-  <script src="/scripts/utils/filters.js"></script>
 </html>

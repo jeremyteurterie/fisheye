@@ -53,4 +53,44 @@ function displayDataMedia(medias) {
   });
 }
 
+function mediasSort(type) {
+  let mediaContainer = document.querySelectorAll(".media_container");
+  mediaContainer = [].slice.call(mediaContainer);
+  if (type === "title") {
+    sortByTitle(mediaContainer);
+  } else if (type === "date") {
+    sortByDate(mediaContainer);
+  } else {
+    sortByLike(mediaContainer);
+  }
+
+  // Fonction pour l'affichage alphabétique
+  function sortByTitle(mediaContainer) {
+    mediaContainer.sort(function (a, b) {
+      return a.dataset.title.localeCompare(b.dataset.title);
+    });
+  }
+
+  // Fonction pour l'affichage par popularité
+  function sortByLike(mediaContainer) {
+    mediaContainer.sort(function (a, b) {
+      return b.dataset.likes - a.dataset.likes;
+    });
+  }
+
+  // Fonction pour l'affichage par date
+  function sortByDate(mediaContainer) {
+    mediaContainer.sort(function (a, b) {
+      return a.dataset.date.localeCompare(b.dataset.date);
+    });
+  }
+
+  const mediaslist = document.querySelector(".photographer_media");
+  mediaslist.innerHTML = "";
+
+  mediaContainer.forEach((media) => {
+    mediaslist.append(media);
+  });
+}
+
 init();

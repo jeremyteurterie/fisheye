@@ -1,9 +1,11 @@
 function mediaFactory(mediaData) {
-  const { price, likes, image, video, title } = mediaData;
+  const { price, likes, image, video, title, date } = mediaData;
 
   const mediaImage = `assets/photographers/medias/${image}`;
   const mediaVideo = `assets/photographers/medias/${video}`;
   const like = `${likes}`;
+  const dates = `${date}`;
+  const titles = `${title}`;
 
   function getUserMedia() {
     const mediaContainer = document.createElement("div");
@@ -17,6 +19,9 @@ function mediaFactory(mediaData) {
     const mediaLikesContainer = document.createElement("div");
 
     mediaContainer.setAttribute("class", "media_container");
+    mediaContainer.setAttribute("data-likes", like);
+    mediaContainer.setAttribute("data-date", dates);
+    mediaContainer.setAttribute("data-title", titles);
 
     // Pop method for media
     // In MP4 case
@@ -79,24 +84,6 @@ function mediaFactory(mediaData) {
     }
 
     mediaLikesButton.addEventListener("click", increaseLikes);
-
-    // Affichage totale des likes
-    // const sumall = mediaData
-    //   .likes((item) => item.likes)
-    //   .reduce((prev, curr) => prev + curr, 0);
-    // console.log(sumall);
-    // function totalLikes() {
-    //   let totalLike = 0;
-    //   totalLike += mediaData.likes;
-    //   console.log(totalLike);
-    //   return totalLike;
-    // }
-
-    // const totalmediaLikes = mediaData.likes.map((mediaData) => {
-    //   let totalLike = 0;
-    //   totalLike += mediaData.likes;
-    //   console.log(totalLike);
-    // });
 
     return mediaContainer;
   }

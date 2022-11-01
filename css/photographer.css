@@ -2,7 +2,6 @@
 
 #contact_modal {
   display: none;
-  z-index: 100000;
 }
 
 .photograph-header {
@@ -167,7 +166,7 @@ form textarea {
   font-size: 18px;
   line-height: 23px;
   border-radius: 5px;
-  margin-: 16px;
+  margin-top: 16px;
   margin-bottom: 16px;
 }
 
@@ -368,15 +367,15 @@ nav > ul > li:hover > a {
   background-color: #db8876;
   border-radius: 5px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 0 34px;
 }
 
 .photographer_footer_likes {
   color: black;
   font-size: 24px;
   margin-bottom: 14px;
+  padding-left: 40px;
+  padding-right: 8px;
 }
 
 .photographer_footer_icon {
@@ -389,7 +388,6 @@ nav > ul > li:hover > a {
   color: black;
   font-size: 24px;
   margin-bottom: 14px;
-  margin-right: 23px;
 }
 
 /* LIGHTBOX */

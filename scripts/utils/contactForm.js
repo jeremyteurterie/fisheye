@@ -1,4 +1,5 @@
 const form = document.querySelector("form");
+const main = document.querySelector(".main");
 const modalBg = document.getElementById("contact_modal");
 const modalBtn = document.getElementById("displayModal");
 const closeModalBtn = document.getElementById("closeModal");
@@ -134,7 +135,7 @@ form.addEventListener("submit", (e) => {
     first = null;
     last = null;
     email = null;
-    alert("Inscription validé !");
+    main.style.display = "block";
   } else {
     alert("Veuillez remplir correctement les champs");
   }
@@ -143,5 +144,10 @@ form.addEventListener("submit", (e) => {
 function closeModal() {
   modalBg.style.display = "none";
 }
+
+// Clavier
+modalBg.onkeydown = function (event) {
+  if (event.key === "Escape") closeModal();
+};
 
 // closeModalBtn.addEventListener("click", closeModal);

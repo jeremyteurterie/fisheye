@@ -17,9 +17,10 @@
     <main class="main">
       <section id="photographeInfos"></section>
 
-      <div id="contact_modal" aria-label="Ouvre formulaire de contact"
+      <div id="contact_modal" aria-label="Formulaire de contact"
       aria-haspopup="dialog"
-      aria-controls="dialog">
+      aria-controls="dialog"
+      role="dialog">
         <div class="modal">
           <header>
             <h2>Contactez-moi</h2>
@@ -96,14 +97,16 @@
     <option value="title" aria-label="Tri alphabétique">Titre</option>
   </select>
   </div>
-  
-      <div id="lightbox" class="lightbox" aria-hidden="true" role=”dialog” aria-describedby="lightbox">
-        <span class="lightbox_close">&times;</span>
-        <div class="lightbox_content">
-          <img src="" alt="">
-        </div>
-      </div>
-  
+
+      <section
+        id="lightbox"
+        class="lightbox-background"
+        role="lightbox"
+        aria-modal="true"
+        aria-hidden="true"
+        tabindex="-1"
+      ></section>
+      
       <div class="photographer_media"></div>
   
     </main>
@@ -112,6 +115,5 @@
   <script src="scripts/factories/media.js"></script>
   <script src="scripts/factories/photographer.js"></script>
   <script src="scripts/utils/contactform.js"></script>
-  <script src="scripts/utils/likes.js"></script>
-  <script src="/scripts/utils/lightBox.js"></script>
+  <script src="/scripts/utils/lightbox.js"></script>
 </html>

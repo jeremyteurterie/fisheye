@@ -132,6 +132,7 @@ form textarea {
   font-weight: 700;
   height: fit-content;
   padding: 16px 10px;
+  cursor: pointer;
 }
 
 .photographImg {
@@ -169,6 +170,7 @@ form textarea {
   border-radius: 5px;
   margin-top: 16px;
   margin-bottom: 16px;
+  cursor: pointer;
 }
 
 /* MEDIA  */

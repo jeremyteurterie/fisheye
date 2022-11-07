@@ -1,119 +1,115 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/png" href="assets/favicon.png" />
-    <link
-      href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
-      rel="stylesheet"
-    />
-    <title>Fisheye - photographe</title>
-  </head>
-  <body id="body-photographer">
-    <header>
-      <img src="assets/images/logo.png" class="logo" />
-    </header>
-    <main class="main">
-      <section id="photographeInfos"></section>
+	<head>
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/png" href="assets/favicon.png" />
+		<link
+			href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
+			rel="stylesheet"
+			/>
+		<title>Fisheye - photographe</title>
+	</head>
+	<body id="body-photographer">
+		<header>
+			<img src="assets/images/logo.png" class="logo" />
+		</header>
+		<main class="main">
+			<section id="photographeInfos"></section>
+			<div id="contact_modal" aria-label="Formulaire de contact"
+				aria-haspopup="dialog"
+				aria-controls="dialog"
+				role="dialog">
+				<div class="modal">
+					<header>
+						<h2>Contactez-moi</h2>
+						<img src="assets/icons/close.svg" onclick="closeModal()" />
+					</header>
+					<form>
+						<div>
+							<div class="first-container">
+								<label>Prénom</label>
+								<input
+									for="first"
+									id="first"
+									name="first"
+									type="text"
+									minlength="2"
+									required
+									/>
+								<span></span>
+							</div>
+							<div class="last-container">
+								<label>Nom</label>
+								<input
+									for="last"
+									id="last"
+									name="last"
+									type="text"
+									minlength="2"
+									required
+									/>
+								<span></span>
+							</div>
+							<div class="email-container">
+								<label>Email</label>
+								<input for="email" id="email" name="email" type="email" required />
+								<span></span>
+							</div>
+							<div class="textarea-container">
+								<label>Votre message</label>
+								<input
+									for="textarea"
+									id="textarea"
+									name="textarea"
+									type="text"
+									required
+									>
+								<span></span>
+							</div>
+							</input>
+						</div>
+						<button type="submit" class="contact_button">Envoyer</button>
+					</form>
+				</div>
+			</div>
+			<div
+				role="search"
+				aria-hidden="false"
+				class="sort select-filter"
+				aria-label="Menu pour trier photos"
+				>
+				<div class="sort-choice"></div>
+				<span> Trier par </span>
+				<select
+					name="sorter"
+					id="sort-choice"
+					onchange="mediasSort(this.value)"
+					>
+					<option value="popularite" aria-label="Tri popularité">
+						Popularité
+					</option>
+					<option disabled="disabled">────────</option>
+					<option value="date" aria-label="Tri date publication">Date</option>
+					<option disabled="disabled">────────</option>
+					<option value="title" aria-label="Tri alphabétique">Titre</option>
+				</select>
+			</div>
 
-      <div id="contact_modal" aria-label="Formulaire de contact"
-      aria-haspopup="dialog"
-      aria-controls="dialog"
-      role="dialog">
-        <div class="modal">
-          <header>
-            <h2>Contactez-moi</h2>
-            <img src="assets/icons/close.svg" onclick="closeModal()" />
-          </header>
-          <form>
-            <div>
-              <div class="first-container">
-                <label>Prénom</label>
-                <input
-                  for="first"
-                  id="first"
-                  name="first"
-                  type="text"
-                  minlength="2"
-                  required
-                />
-                <span></span>
-              </div>
-              <div class="last-container">
-                <label>Nom</label>
-                <input
-                  for="last"
-                  id="last"
-                  name="last"
-                  type="text"
-                  minlength="2"
-                  required
-                />
-                <span></span>
-              </div>
-              <div class="email-container">
-                <label>Email</label>
-                <input for="email" id="email" name="email" type="email" required />
-                <span></span>
-              </div>
-              <div class="textarea-container">
-                <label>Votre message</label>
-                <input
-                  for="textarea"
-                  id="textarea"
-                  name="textarea"
-                  type="text"
-                  required
-                >
-                <span></span>
-              </div>
-            </input>
-            </div>
-            <button type="submit" class="contact_button">Envoyer</button>
-          </form>
-        </div>
-      </div>
-  
-  <div
-  role="search"
-  aria-hidden="false"
-  class="sort select-filter"
-  aria-label="Menu pour trier photos"
-  >
-  <div class="sort-choice"></div>
-  <span> Trier par </span>
-  <select
-    name="sorter"
-    id="sort-choice"
-    onchange="mediasSort(this.value)"
-  >
-    <option value="popularite" aria-label="Tri popularité">
-      Popularité
-    </option>
-    <option disabled="disabled">────────</option>
-    <option value="date" aria-label="Tri date publication">Date</option>
-    <option disabled="disabled">────────</option>
-    <option value="title" aria-label="Tri alphabétique">Titre</option>
-  </select>
-  </div>
-
-      <section
-        id="lightbox"
-        class="lightbox-background"
-        role="lightbox"
-        aria-modal="true"
-        aria-hidden="true"
-        tabindex="-1"
-      ></section>
-      
-      <div class="photographer_media"></div>
-  
-    </main>
-  </body>
-  <script src="scripts/pages/photographer.js"></script>
-  <script src="scripts/factories/media.js"></script>
-  <script src="scripts/factories/photographer.js"></script>
-  <script src="scripts/utils/contactform.js"></script>
-  <script src="/scripts/utils/lightbox.js"></script>
+			<section
+				id="lightbox"
+				class="lightbox-background"
+				role="lightbox"
+				aria-modal="true"
+				aria-hidden="true"
+				tabindex="-1"
+				></section>
+        
+			<div class="photographer_media"></div>
+		</main>
+	</body>
+	<script src="scripts/pages/photographer.js"></script>
+	<script src="scripts/factories/media.js"></script>
+	<script src="scripts/factories/photographer.js"></script>
+	<script src="scripts/utils/contactform.js"></script>
 </html>

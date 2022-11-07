@@ -108,11 +108,16 @@ const croixFermer = document.querySelectorAll(".fermer"); // Fermer la modale
 const mediaLightbox = document.querySelectorAll(".media_container");
 const mediaClavier = document.querySelector(".grillePhotosProfil_main");
 
-mediaLightbox.forEach(() => addEventListener("click", launchLighbox));
+mediaLightbox.forEach(() => {
+  console.log("event");
+  addEventListener("click", launchLightbox);
+});
+
+console.log(mediaLightbox);
 croixFermer.forEach((btn) => btn.addEventListener("click", closeLightbox)); // Fermer la modale
 
 // Modal form
-function launchLighbox() {
+function launchLightbox() {
   lightbox.style.display = "block";
 }
 
@@ -127,7 +132,7 @@ function galleryCarrousel(id, type, media, alt, title) {
   document.querySelectorAll(".lightbox-media").forEach((Lmedia) => {
     Lmedia.remove();
   });
-  launchLighbox();
+  launchLightbox();
 
   let mediasCarrousel;
 

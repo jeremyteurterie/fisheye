@@ -1,14 +1,13 @@
 // Récupérer les données des photographes en utilisant fetch
-async function getPhotographers() {
+async function getPhotographers () {
   const { photographers } = await fetch("./data/photographers.json").then(
     (response) => response.json()
   );
-  console.log(photographers);
   return { photographers };
 }
 
 // Affichage des données des photographes
-async function displayData(photographers) {
+async function displayData (photographers) {
   const photographersSection = document.querySelector(".photographer_section");
 
   photographers.forEach((photographer) => {
@@ -18,7 +17,7 @@ async function displayData(photographers) {
   });
 }
 
-async function init() {
+async function init () {
   // Récupère les datas des photographes
   const { photographers } = await getPhotographers();
   displayData(photographers);

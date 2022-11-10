@@ -322,6 +322,7 @@ nav > ul > li:hover > a {
   height: 300px;
   object-fit: cover;
   border-radius: 1%;
+  cursor: pointer;
 }
 
 .media_likescontainer {

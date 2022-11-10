@@ -9,8 +9,6 @@ const inputs = document.querySelectorAll(
 
 let first, last, email, textarea;
 
-console.log(inputs);
-
 const addGlobalEventListener = (type, selector, callback, options) => {
   document.addEventListener(
     type,
@@ -119,7 +117,7 @@ inputs.forEach((input) => {
 });
 
 // Fonction pour vérifier l'envoi du formulaire
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", (event) => {
   console.log("test");
   if (first && last && email && textarea) {
     const data = {
@@ -129,15 +127,11 @@ form.addEventListener("submit", (e) => {
       textarea,
     };
     console.log(data);
-
     inputs.forEach((input) => (input.value = ""));
-
-    first = null;
-    last = null;
-    email = null;
     main.style.display = "block";
+    closeModal();
   } else {
-    alert("Veuillez remplir correctement les champs");
+    event.preventDefault();
   }
 });
 

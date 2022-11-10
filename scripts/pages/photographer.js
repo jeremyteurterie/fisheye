@@ -1,34 +1,34 @@
-async function getPhotographer() {
+async function getPhotographer () {
   // const id = window.location.search.split("id=")[1];
 
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
-  console.log(id);
 
   const photographers = await fetch("./data/photographers.json").then(
     (response) => response.json()
   );
 
   photographers.photographers = photographers.photographers.filter(
+    // eslint-disable-next-line eqeqeq
     (photographer) => photographer.id == id
   )[0];
   photographers.media = photographers.media.filter(
+    // eslint-disable-next-line eqeqeq
     (media) => media.photographerId == id
   );
 
   return photographers;
 }
 
-async function init() {
+async function init () {
   // Récupère les datas des photographes
   const photographer = await getPhotographer();
-  console.log(photographer);
   displayData(photographer.photographers);
   displayDataMedia(photographer.media);
 }
 
 // Fonction qui fait appraitre les photographes
-function displayData(photographer) {
+function displayData (photographer) {
   const photographersSection = document.getElementById("photographeInfos");
   const profileModel = photographerFactory(photographer);
   const profiles = profileModel.getPhotographerProfil();
@@ -36,7 +36,7 @@ function displayData(photographer) {
 }
 
 // Fonction qui fait appraitre les médias
-function displayDataMedia(medias) {
+function displayDataMedia (medias) {
   const mediaslist = document.querySelector(".photographer_media");
   Array.from(medias).forEach((media) => {
     const mediaModel = mediaFactory(media);
@@ -50,11 +50,12 @@ function displayDataMedia(medias) {
   const displaylikes = medias.map((media) => {
     totalLike += media.likes;
     document.querySelector("#totalLike").innerHTML = totalLike;
+    return displaylikes;
   });
 }
 
 // Fonction pour le tri des médias
-function mediasSort(type) {
+function mediasSort (type) {
   let mediaContainer = document.querySelectorAll(".media_container");
   mediaContainer = [].slice.call(mediaContainer);
   if (type === "title") {
@@ -66,21 +67,21 @@ function mediasSort(type) {
   }
 
   // Fonction pour l'affichage alphabétique
-  function sortByTitle(mediaContainer) {
+  function sortByTitle (mediaContainer) {
     mediaContainer.sort(function (a, b) {
       return a.dataset.title.localeCompare(b.dataset.title);
     });
   }
 
   // Fonction pour l'affichage par popularité
-  function sortByLike(mediaContainer) {
+  function sortByLike (mediaContainer) {
     mediaContainer.sort(function (a, b) {
       return b.dataset.likes - a.dataset.likes;
     });
   }
 
   // Fonction pour l'affichage par date
-  function sortByDate(mediaContainer) {
+  function sortByDate (mediaContainer) {
     mediaContainer.sort(function (a, b) {
       return a.dataset.date.localeCompare(b.dataset.date);
     });
@@ -94,34 +95,38 @@ function mediasSort(type) {
   });
 }
 
-/****************** Lightbox ********************/
+// Lightbox
 
 // Elements
-
 const fondLightbox = document.querySelector(".lightbox-background");
 const lightbox = document.getElementById("lightbox");
-console.log(lightbox);
+const mediaLightbox = document.querySelectorAll(".media_container");
 const suivante = document.querySelectorAll(".droite");
 const precedente = document.querySelectorAll(".gauche");
 const titre = document.querySelectorAll(".titre-media");
 const croixFermer = document.querySelectorAll(".fermer"); // Fermer la modale
-const mediaLightbox = document.querySelectorAll(".media_container");
 const mediaClavier = document.querySelector(".grillePhotosProfil_main");
 
-mediaLightbox.forEach(() => {
-  console.log("event");
-  addEventListener("click", launchLightbox);
-});
+lightbox.onclick = () => {
+  console.log("Clicked button");
+  lightbox.style.display = "block";
+};
 
-console.log(mediaLightbox);
-croixFermer.forEach((btn) => btn.addEventListener("click", closeLightbox)); // Fermer la modale
+// mediaLightbox.forEach(() => {
+//   console.log("event");
+//   addEventListener("click", launchLightbox);
+//   .onclick = function() { myScript };
+// });
+
+// console.log(mediaLightbox);
+// croixFermer.forEach((btn) => btn.addEventListener("click", closeLightbox)); // Fermer la modale
 
 // Modal form
-function launchLightbox() {
-  lightbox.style.display = "block";
-}
+// function launchLightbox() {
+//   lightbox.style.display = "block";
+// }
 
-function closeLightbox() {
+function closeLightbox () {
   lightbox.style.display = "none";
   document.querySelectorAll(".lightbox-media").forEach((Lmedia) => {
     Lmedia.remove();

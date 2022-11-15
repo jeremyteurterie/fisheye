@@ -1,11 +1,12 @@
-function mediaFactory (mediaData) {
+function mediaFactory(mediaData) {
   const { price, likes, image, video, title, date, id } = mediaData;
 
   const mediaImage = `assets/photographers/medias/${image}`;
   const mediaVideo = `assets/photographers/medias/${video}`;
 
-  function getUserMedia () {
-    const mediaContainer = document.createElement("div");
+  function getUserMedia(nbMedias) {
+    const mediaContainer = document.createElement("article");
+    const mediaLink = document.createElement("a");
     const mediaDescription = document.createElement("p");
     const mediaTitle = document.createElement("h2");
     const mediaLikes = document.createElement("h3");
@@ -16,10 +17,10 @@ function mediaFactory (mediaData) {
     const mediaLikesContainer = document.createElement("div");
 
     mediaContainer.setAttribute("class", "media_container");
-    mediaContainer.setAttribute("data-likes", `${likes}`);
-    mediaContainer.setAttribute("data-date", `${date}`);
-    mediaContainer.setAttribute("data-title", `${title}`);
-    mediaContainer.setAttribute("data-id", `${id}`);
+    // mediaContainer.setAttribute("data-likes", `${likes}`);
+    // mediaContainer.setAttribute("data-date", `${date}`);
+    // mediaContainer.setAttribute("data-title", `${title}`);
+    // mediaContainer.setAttribute("data-id", `${id}`);
 
     // Pop method for media
     // In MP4 case
@@ -32,7 +33,10 @@ function mediaFactory (mediaData) {
       source.setAttribute("src", mediaVideo);
       source.setAttribute("type", "video/mp4");
 
-      mediaContainer.append(video, mediaDescription);
+      mediaLink.setAttribute("class", "media_link");
+      mediaLink.append(video);
+      mediaLink.href = "#";
+      mediaContainer.append(mediaLink, mediaDescription);
       video.appendChild(source);
     }
     // In JPG case
@@ -41,7 +45,10 @@ function mediaFactory (mediaData) {
       image.setAttribute("class", "media_image");
       image.setAttribute("src", mediaImage);
 
-      mediaContainer.append(image, mediaDescription);
+      mediaLink.setAttribute("class", "media_link");
+      mediaLink.append(image);
+      mediaLink.href = "#";
+      mediaContainer.append(mediaLink, mediaDescription);
     }
     //
     mediaDescription.setAttribute("class", "media_description");
@@ -64,6 +71,8 @@ function mediaFactory (mediaData) {
     mediaPrice.textContent = `${price}€/jour`;
 
     //
+
+    //
     mediaDescription.append(mediaTitle, mediaLikes, mediaLikesContainer);
     mediaLikesContainer.append(
       mediaLikes,
@@ -73,7 +82,7 @@ function mediaFactory (mediaData) {
     mediaLikesButton.appendChild(mediaLikesButtonImage);
 
     // Ajout d'un like pour chaque média lorsque l'utilisateur clique sur le bouton
-    function increaseLike () {
+    function increaseLike() {
       let count = `${likes}`;
       count++;
       mediaLikes.innerText = count;
@@ -88,5 +97,26 @@ function mediaFactory (mediaData) {
     return mediaContainer;
   }
 
+  // function getUserCardLightbox(nbMedias) {
+  //   let mediaLightbox = ``;
+
+  //   if (mediaData.image) {
+  //     mediaLightbox = document.createElement("img");
+  //     mediaLightbox.setAttribute("src", mediaImage);
+  //     mediaLightbox.setAttribute("data-position", nbMedias);
+  //     mediaLightbox.setAttribute("data-title", `${title}`);
+  //   } else {
+  //     mediaLightbox = document.createElement("video");
+  //     mediaLightbox.setAttribute("controls", "");
+  //     mediaLightbox.setAttribute("src", mediaVideo);
+  //     mediaLightbox.setAttribute("data-position", nbMedias);
+  //     mediaLightbox.setAttribute("data-title", `${title}`);
+  //   }
+
+  //   mediaLightbox.classList.add("main--modal__allImg--pictures");
+  //   mediaLightbox.setAttribute("alt", `Vidéo s'intitulant ${title}`);
+
+  //   return mediaLightbox;
+  // }
   return { getUserMedia };
 }

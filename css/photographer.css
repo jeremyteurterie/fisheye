@@ -404,6 +404,11 @@ nav > ul > li:hover > a {
 }
 
 /****************** Lightbox **********************/
+
+#demo {
+  cursor: pointer;
+}
+
 .lightbox-background {
   position: fixed;
   z-index: 10;
@@ -412,7 +417,6 @@ nav > ul > li:hover > a {
   position: fixed;
   top: 0;
   width: 100%;
-  display: none;
 }
 
 .lightbox-media {
@@ -421,8 +425,8 @@ nav > ul > li:hover > a {
   flex-direction: column;
 }
 
-.lightbox-media img,
-.lightbox-media video {
+.lightbox-background img,
+.lightbox-background video {
   display: flex;
   height: 450px;
   width: 450px;
@@ -457,7 +461,8 @@ nav > ul > li:hover > a {
   font-size: 50px;
 }
 
-.fermer {
+i {
+  width: 20px;
   position: fixed;
   z-index: 11;
   color: #901c1c;

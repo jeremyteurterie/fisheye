@@ -3,17 +3,16 @@ async function getPhotographer() {
 
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
+  console.log(id);
 
   const photographers = await fetch("./data/photographers.json").then(
     (response) => response.json()
   );
 
   photographers.photographers = photographers.photographers.filter(
-    // eslint-disable-next-line eqeqeq
     (photographer) => photographer.id == id
   )[0];
   photographers.media = photographers.media.filter(
-    // eslint-disable-next-line eqeqeq
     (media) => media.photographerId == id
   );
 
@@ -23,6 +22,7 @@ async function getPhotographer() {
 async function init() {
   // Récupère les datas des photographes
   const photographer = await getPhotographer();
+  console.log(photographer);
   displayData(photographer.photographers);
   displayDataMedia(photographer.media);
 }
@@ -38,19 +38,15 @@ function displayData(photographer) {
 // Fonction qui fait appraitre les médias
 function displayDataMedia(medias) {
   const mediaslist = document.querySelector(".photographer_media");
-  // const mediasLightbox = document.querySelector(".main--modal__allImg");
   Array.from(medias).forEach((media) => {
     const mediaModel = mediaFactory(media);
     const displaymedia = mediaModel.getUserMedia();
-    // const userCardLightbox = mediaModel.getUserCardLightbox();
     mediaslist.appendChild(displaymedia);
-    // mediasLightbox.appendChild(userCardLightbox);
   });
 
   // Affichage du total des likes
   let totalLike = 0;
 
-  // Affichage du total des likes
   const displaylikes = medias.map((media) => {
     totalLike += media.likes;
     document.querySelector("#totalLike").innerHTML = totalLike;
@@ -97,4 +93,83 @@ function mediasSort(type) {
     mediaslist.append(media);
   });
 }
+
+/****************** Lightbox ********************/
+
+// Elements
+
+const fondLightbox = document.querySelector(".lightbox-background");
+const lightbox = document.getElementById("lightbox");
+console.log(lightbox);
+const suivante = document.querySelectorAll(".droite");
+const precedente = document.querySelectorAll(".gauche");
+const titre = document.querySelectorAll(".titre-media");
+const croixFermer = document.querySelectorAll(".fermer"); // Fermer la modale
+const mediaLightbox = document.querySelectorAll(".media_container");
+const mediaClavier = document.querySelector(".grillePhotosProfil_main");
+
+mediaLightbox.forEach(() => {
+  console.log("event");
+  addEventListener("click", launchLightbox);
+});
+
+console.log(mediaLightbox);
+croixFermer.forEach((btn) => btn.addEventListener("click", closeLightbox)); // Fermer la modale
+
+// Modal form
+function launchLightbox() {
+  lightbox.style.display = "block";
+}
+
+function closeLightbox() {
+  lightbox.style.display = "none";
+  document.querySelectorAll(".lightbox-media").forEach((Lmedia) => {
+    Lmedia.remove();
+  });
+}
+
+// function galleryCarrousel(id, type, media, alt, title) {
+//   document.querySelectorAll(".lightbox-media").forEach((Lmedia) => {
+//     Lmedia.remove();
+//   });
+//   launchLightbox();
+
+//   let mediasCarrousel;
+
+//   if (type === "video") {
+//     mediasCarrousel = `<video controls class="video_main"><source src="assets/images/${media}" alt="${alt}"></video>`;
+//   } else {
+//     mediasCarrousel = `<img src="assets/images/${media}" alt="${alt}"  data-media="${id}">`;
+//   }
+
+//   const totalMedias = document.querySelectorAll(".media_container");
+//   const firstChildTitle = document
+//     .querySelectorAll(".media_container")[0]
+//     .getAttribute("data-title");
+//   const lastChildTitle = document
+//     .querySelectorAll(".media_container")
+//     [totalMedias.length - 1].getAttribute("data-title");
+
+//   var index =
+//     Array.prototype.indexOf.call(
+//       document.getElementById(id).parentNode.children,
+//       document.getElementById(id)
+//     ) + 1;
+
+//   let flecheGauche;
+//   if (title === firstChildTitle) {
+//     flecheGauche = "";
+//   } else {
+//     flecheGauche = `<i class="fa-solid fa-angle-left gauche" id="fleche-gauche" aria-label="Image précédente" onclick="flecheGaucheLightbox(${
+//       index - 2
+//     })" ></i>`;
+//   }
+
+//   let flecheDroite;
+//   if (title === lastChildTitle) {
+//     flecheDroite = "";
+//   } else {
+//     flecheDroite = `<i class="fa-solid fa-angle-right droite" id="fleche-droite" aria-label="Image suivante" onclick="flecheDroiteLightbox(${index})"></i>`;
+//   }
+// }
 init();

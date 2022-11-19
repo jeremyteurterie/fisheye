@@ -1,4 +1,3 @@
-/* eslint-disable no-sequences */
 function photographerFactory(data) {
   const { name, portrait, city, country, id, price, tagline } = data;
 
@@ -44,7 +43,7 @@ function photographerFactory(data) {
     const location = document.createElement("h3");
     const tag = document.createElement("h4");
     const image = document.createElement("img");
-    const icon = "assets/icons/heart.png";
+    const icon = `assets/icons/heart.png`;
     const modalButton = document.createElement("button");
 
     // Encart likes + prix des pages photographes.

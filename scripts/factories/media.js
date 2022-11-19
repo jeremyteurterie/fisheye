@@ -1,30 +1,52 @@
 function mediaFactory(mediaData) {
-  const { price, likes, image, video, title, date, id } = mediaData;
+  const { price, likes, image, video, title, date } = mediaData;
 
   const mediaImage = `assets/photographers/medias/${image}`;
   const mediaVideo = `assets/photographers/medias/${video}`;
+  const like = `${likes}`;
+  const dates = `${date}`;
+  const titles = `${title}`;
 
-  function getUserMedia(nbMedias) {
-    const mediaContainer = document.createElement("article");
-    const mediaLink = document.createElement("a");
+  function getUserMedia() {
+    const mediaContainer = document.createElement("div");
     const mediaDescription = document.createElement("p");
     const mediaTitle = document.createElement("h2");
     const mediaLikes = document.createElement("h3");
     const mediaPrice = document.createElement("h4");
     const mediaLikesButton = document.createElement("button");
     const mediaLikesButtonImage = document.createElement("img");
-    const icon = "assets/icons/heart.svg";
+    const icon = `assets/icons/heart.svg`;
     const mediaLikesContainer = document.createElement("div");
 
     mediaContainer.setAttribute("class", "media_container");
-    // mediaContainer.setAttribute("data-likes", `${likes}`);
-    // mediaContainer.setAttribute("data-date", `${date}`);
-    // mediaContainer.setAttribute("data-title", `${title}`);
-    // mediaContainer.setAttribute("data-id", `${id}`);
+    mediaContainer.setAttribute("data-likes", like);
+    mediaContainer.setAttribute("data-date", dates);
+    mediaContainer.setAttribute("data-title", titles);
+
+    // Lightbox
+    const lightbox = document.getElementById("lightbox");
+    const closeBtn = document.querySelector("#close");
+    const mediaLink = document.createElement("a");
+
+    mediaLink.onclick = function () {
+      openLightbox();
+    };
+
+    closeBtn.onclick = function () {
+      closeLightbox();
+    };
+
+    function openLightbox() {
+      lightbox.style.display = "block";
+    }
+
+    function closeLightbox() {
+      lightbox.style.display = "none";
+    }
 
     // Pop method for media
     // In MP4 case
-    if (mediaVideo.split(".").pop() === "mp4") {
+    if (mediaVideo.split(".").pop() == "mp4") {
       const video = document.createElement("video");
       video.setAttribute("controls", "");
       video.setAttribute("class", "media_image");
@@ -33,22 +55,18 @@ function mediaFactory(mediaData) {
       source.setAttribute("src", mediaVideo);
       source.setAttribute("type", "video/mp4");
 
-      mediaLink.setAttribute("class", "media_link");
-      mediaLink.append(video);
-      mediaLink.href = "#";
-      mediaContainer.append(mediaLink, mediaDescription);
+      mediaContainer.append(mediaLink, video, mediaDescription);
       video.appendChild(source);
+      mediaLink.append(video);
     }
     // In JPG case
-    if (mediaImage.split(".").pop() === "jpg") {
+    if (mediaImage.split(".").pop() == "jpg") {
       const image = document.createElement("img");
       image.setAttribute("class", "media_image");
       image.setAttribute("src", mediaImage);
 
-      mediaLink.setAttribute("class", "media_link");
+      mediaContainer.append(mediaLink, image, mediaDescription);
       mediaLink.append(image);
-      mediaLink.href = "#";
-      mediaContainer.append(mediaLink, mediaDescription);
     }
     //
     mediaDescription.setAttribute("class", "media_description");
@@ -71,8 +89,6 @@ function mediaFactory(mediaData) {
     mediaPrice.textContent = `${price}€/jour`;
 
     //
-
-    //
     mediaDescription.append(mediaTitle, mediaLikes, mediaLikesContainer);
     mediaLikesContainer.append(
       mediaLikes,
@@ -82,41 +98,18 @@ function mediaFactory(mediaData) {
     mediaLikesButton.appendChild(mediaLikesButtonImage);
 
     // Ajout d'un like pour chaque média lorsque l'utilisateur clique sur le bouton
-    function increaseLike() {
-      let count = `${likes}`;
+    function increaseLikes() {
+      let count = like;
       count++;
       mediaLikes.innerText = count;
-      // eslint-disable-next-line no-undef
       totalLike.innerText = parseInt(totalLike.innerText) + 1; // Ajout d'un like dans la bannière totale
       return count;
     }
 
-    // eslint-disable-next-line no-undef
-    mediaLikesButton.addEventListener("click", increaseLike);
+    mediaLikesButton.addEventListener("click", increaseLikes);
 
     return mediaContainer;
   }
 
-  // function getUserCardLightbox(nbMedias) {
-  //   let mediaLightbox = ``;
-
-  //   if (mediaData.image) {
-  //     mediaLightbox = document.createElement("img");
-  //     mediaLightbox.setAttribute("src", mediaImage);
-  //     mediaLightbox.setAttribute("data-position", nbMedias);
-  //     mediaLightbox.setAttribute("data-title", `${title}`);
-  //   } else {
-  //     mediaLightbox = document.createElement("video");
-  //     mediaLightbox.setAttribute("controls", "");
-  //     mediaLightbox.setAttribute("src", mediaVideo);
-  //     mediaLightbox.setAttribute("data-position", nbMedias);
-  //     mediaLightbox.setAttribute("data-title", `${title}`);
-  //   }
-
-  //   mediaLightbox.classList.add("main--modal__allImg--pictures");
-  //   mediaLightbox.setAttribute("alt", `Vidéo s'intitulant ${title}`);
-
-  //   return mediaLightbox;
-  // }
   return { getUserMedia };
 }

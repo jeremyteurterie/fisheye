@@ -53,6 +53,8 @@ function displayDataMedia(medias) {
   });
 }
 
+// Fonction pour l'affichage des médias dans la lightbox
+
 // Fonction pour le tri des médias
 function mediasSort(type) {
   let mediaContainer = document.querySelectorAll(".media_container");
@@ -93,83 +95,4 @@ function mediasSort(type) {
     mediaslist.append(media);
   });
 }
-
-/****************** Lightbox ********************/
-
-// Elements
-
-const fondLightbox = document.querySelector(".lightbox-background");
-const lightbox = document.getElementById("lightbox");
-console.log(lightbox);
-const suivante = document.querySelectorAll(".droite");
-const precedente = document.querySelectorAll(".gauche");
-const titre = document.querySelectorAll(".titre-media");
-const croixFermer = document.querySelectorAll(".fermer"); // Fermer la modale
-const mediaLightbox = document.querySelectorAll(".media_container");
-const mediaClavier = document.querySelector(".grillePhotosProfil_main");
-
-mediaLightbox.forEach(() => {
-  console.log("event");
-  addEventListener("click", launchLightbox);
-});
-
-console.log(mediaLightbox);
-croixFermer.forEach((btn) => btn.addEventListener("click", closeLightbox)); // Fermer la modale
-
-// Modal form
-function launchLightbox() {
-  lightbox.style.display = "block";
-}
-
-function closeLightbox() {
-  lightbox.style.display = "none";
-  document.querySelectorAll(".lightbox-media").forEach((Lmedia) => {
-    Lmedia.remove();
-  });
-}
-
-// function galleryCarrousel(id, type, media, alt, title) {
-//   document.querySelectorAll(".lightbox-media").forEach((Lmedia) => {
-//     Lmedia.remove();
-//   });
-//   launchLightbox();
-
-//   let mediasCarrousel;
-
-//   if (type === "video") {
-//     mediasCarrousel = `<video controls class="video_main"><source src="assets/images/${media}" alt="${alt}"></video>`;
-//   } else {
-//     mediasCarrousel = `<img src="assets/images/${media}" alt="${alt}"  data-media="${id}">`;
-//   }
-
-//   const totalMedias = document.querySelectorAll(".media_container");
-//   const firstChildTitle = document
-//     .querySelectorAll(".media_container")[0]
-//     .getAttribute("data-title");
-//   const lastChildTitle = document
-//     .querySelectorAll(".media_container")
-//     [totalMedias.length - 1].getAttribute("data-title");
-
-//   var index =
-//     Array.prototype.indexOf.call(
-//       document.getElementById(id).parentNode.children,
-//       document.getElementById(id)
-//     ) + 1;
-
-//   let flecheGauche;
-//   if (title === firstChildTitle) {
-//     flecheGauche = "";
-//   } else {
-//     flecheGauche = `<i class="fa-solid fa-angle-left gauche" id="fleche-gauche" aria-label="Image précédente" onclick="flecheGaucheLightbox(${
-//       index - 2
-//     })" ></i>`;
-//   }
-
-//   let flecheDroite;
-//   if (title === lastChildTitle) {
-//     flecheDroite = "";
-//   } else {
-//     flecheDroite = `<i class="fa-solid fa-angle-right droite" id="fleche-droite" aria-label="Image suivante" onclick="flecheDroiteLightbox(${index})"></i>`;
-//   }
-// }
 init();

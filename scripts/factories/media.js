@@ -17,32 +17,12 @@ function mediaFactory(mediaData) {
     const mediaLikesButtonImage = document.createElement("img");
     const icon = `assets/icons/heart.svg`;
     const mediaLikesContainer = document.createElement("div");
+    const mediaLink = document.createElement("a");
 
     mediaContainer.setAttribute("class", "media_container");
     mediaContainer.setAttribute("data-likes", like);
     mediaContainer.setAttribute("data-date", dates);
     mediaContainer.setAttribute("data-title", titles);
-
-    // Lightbox
-    const lightbox = document.getElementById("lightbox");
-    const closeBtn = document.querySelector("#close");
-    const mediaLink = document.createElement("a");
-
-    mediaLink.onclick = function () {
-      openLightbox();
-    };
-
-    closeBtn.onclick = function () {
-      closeLightbox();
-    };
-
-    function openLightbox() {
-      lightbox.style.display = "block";
-    }
-
-    function closeLightbox() {
-      lightbox.style.display = "none";
-    }
 
     // Pop method for media
     // In MP4 case
@@ -68,6 +48,48 @@ function mediaFactory(mediaData) {
       mediaContainer.append(mediaLink, image, mediaDescription);
       mediaLink.append(image);
     }
+
+    // Lightbox
+    const lightbox = document.getElementById("lightbox");
+    const mediaLightbox = document.createElement("div");
+
+    const closeBtn = document.querySelector("#close");
+    const leftArrow = document.querySelector(".gauche");
+    const nextArrow = document.querySelector(".droite");
+    const mediaImg = document.createElement("img");
+    const mediaVid = document.createElement("video");
+    mediaVid.setAttribute("controls", "");
+
+    mediaImg.setAttribute("src", mediaImage);
+    mediaVid.setAttribute("src", mediaVideo);
+
+    mediaLightbox.setAttribute("id", "mediaLightbox");
+    mediaLink.onclick = function () {
+      console.log(mediaImage, "onclick");
+      console.log(mediaVideo, "onclick");
+      console.log(typeof mediaVideo);
+
+      if (!mediaImage.includes("undefined")) {
+        openLightbox(mediaImg);
+      } else {
+        openLightbox(mediaVid);
+      }
+    };
+
+    closeBtn.onclick = function () {
+      closeLightbox();
+    };
+
+    function openLightbox(media) {
+      lightbox.style.display = "block";
+      lightbox.append(media);
+    }
+
+    function closeLightbox() {
+      lightbox.style.display = "none";
+      lightbox.innerHTML = "";
+    }
+
     //
     mediaDescription.setAttribute("class", "media_description");
     //

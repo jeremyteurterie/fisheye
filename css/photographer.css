@@ -429,8 +429,10 @@ nav > ul > li:hover > a {
 .lightbox-background img,
 .lightbox-background video {
   display: flex;
-  height: 450px;
+  height: auto;
   width: 450px;
+  padding-top: 35px;
+  padding-right: 125px;
   object-fit: cover;
   border-radius: 5px;
   justify-content: center;

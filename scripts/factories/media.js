@@ -1,7 +1,8 @@
 function mediaFactory(mediaData) {
-  const { price, likes, image, video, title, date } = mediaData;
+  const { price, likes, image, video, title, date, id } = mediaData;
 
   const mediaImage = `assets/photographers/medias/${image}`;
+  console.log(mediaImage);
   const mediaVideo = `assets/photographers/medias/${video}`;
   const like = `${likes}`;
   const dates = `${date}`;
@@ -52,23 +53,21 @@ function mediaFactory(mediaData) {
     // Lightbox
     const lightbox = document.getElementById("lightbox");
     const mediaLightbox = document.createElement("div");
-
     const closeBtn = document.querySelector("#close");
-    const leftArrow = document.querySelector(".gauche");
-    const nextArrow = document.querySelector(".droite");
+    const previousBtn = document.querySelector(".gauche");
+    const nextBtn = document.querySelector(".droite");
     const mediaImg = document.createElement("img");
     const mediaVid = document.createElement("video");
+
     mediaVid.setAttribute("controls", "");
 
     mediaImg.setAttribute("src", mediaImage);
+    mediaImg.setAttribute("class", "image-slider");
     mediaVid.setAttribute("src", mediaVideo);
 
     mediaLightbox.setAttribute("id", "mediaLightbox");
-    mediaLink.onclick = function () {
-      console.log(mediaImage, "onclick");
-      console.log(mediaVideo, "onclick");
-      console.log(typeof mediaVideo);
 
+    mediaLink.onclick = function () {
       if (!mediaImage.includes("undefined")) {
         openLightbox(mediaImg);
       } else {
@@ -90,6 +89,26 @@ function mediaFactory(mediaData) {
       lightbox.innerHTML = "";
     }
 
+    //-----------------------------------------------------------------
+    // Next and previous button
+    var i = 0; // Current image index
+
+    previousBtn.addEventListener("click", () => {
+      if (i <= 0) i = mediaImage.length;
+      i--;
+      return setImg();
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (i >= mediaImage.length - 1) i = -1;
+      i++;
+      return setImg();
+    });
+
+    function setImg() {
+      return mediaImg.setAttribute("src", "mediaImg" + mediaImg[i]);
+    }
+    //-----------------------------------------------------------------
     //
     mediaDescription.setAttribute("class", "media_description");
     //

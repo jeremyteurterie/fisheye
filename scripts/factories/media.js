@@ -53,8 +53,6 @@ function mediaFactory(mediaData) {
     const lightbox = document.getElementById("lightbox");
     const mediaLightbox = document.createElement("div");
     const closeBtn = document.querySelector("#close");
-    const previousBtn = document.querySelector(".gauche");
-    const nextBtn = document.querySelector(".droite");
     const mediaImg = document.createElement("img");
     const mediaVid = document.createElement("video");
 
@@ -89,7 +87,10 @@ function mediaFactory(mediaData) {
     }
 
     // Next and previous button
-    var i = 0; // Current image index
+    const previousBtn = document.querySelector(".gauche");
+    const nextBtn = document.querySelector(".droite");
+
+    let i = 0; // Current image index
 
     previousBtn.addEventListener("click", () => {
       if (i <= 0) i = mediaImage.length;

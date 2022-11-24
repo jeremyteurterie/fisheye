@@ -2,7 +2,6 @@ function mediaFactory(mediaData) {
   const { price, likes, image, video, title, date, id } = mediaData;
 
   const mediaImage = `assets/photographers/medias/${image}`;
-  console.log(mediaImage);
   const mediaVideo = `assets/photographers/medias/${video}`;
   const like = `${likes}`;
   const dates = `${date}`;
@@ -89,7 +88,6 @@ function mediaFactory(mediaData) {
       lightbox.innerHTML = "";
     }
 
-    //-----------------------------------------------------------------
     // Next and previous button
     var i = 0; // Current image index
 
@@ -108,28 +106,20 @@ function mediaFactory(mediaData) {
     function setImg() {
       return mediaImg.setAttribute("src", "mediaImg" + mediaImg[i]);
     }
-    //-----------------------------------------------------------------
-    //
+
     mediaDescription.setAttribute("class", "media_description");
-    //
     mediaTitle.setAttribute("class", "media_title");
     mediaTitle.textContent = `${title}`;
-    //
     mediaLikesContainer.setAttribute("class", "media_likescontainer");
-    //
     mediaLikes.setAttribute("class", "media_likes");
     mediaLikes.textContent = `${likes}`;
-    //
     mediaLikesButton.setAttribute("class", "media_likesbutton");
     mediaLikesButton.setAttribute("type", "button");
-    //
     mediaLikesButtonImage.setAttribute("class", "media_likesbuttonimage");
     mediaLikesButtonImage.setAttribute("src", icon);
-    //
     mediaPrice.setAttribute("class", "media_price");
     mediaPrice.textContent = `${price}€/jour`;
 
-    //
     mediaDescription.append(mediaTitle, mediaLikes, mediaLikesContainer);
     mediaLikesContainer.append(
       mediaLikes,

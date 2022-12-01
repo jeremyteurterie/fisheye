@@ -16,7 +16,14 @@
   </head>
   <body id="body-photographer">
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <img
+        src="assets/images/logo.png"
+        class="logo"
+        alt="logo"
+        class="logo"
+        aria-label="Retour à la page d'accueil"
+        tabindex="1"
+      />
     </header>
     <main id="main" class="main" aria-hidden="false">
       <section id="photographeInfos"></section>
@@ -30,7 +37,12 @@
         <div class="modal">
           <header>
             <h2>Contactez-moi</h2>
-            <img src="assets/icons/close.svg" onclick="closeModal()" />
+            <img
+              src="assets/icons/close.svg"
+              onclick="closeModal()"
+              alt="Fermer"
+              aria-label="Fermer"
+            />
           </header>
           <form novalidate>
             <div>
@@ -38,6 +50,7 @@
                 <label>Prénom</label>
                 <input
                   for="first"
+                  tabindex="2"
                   id="first"
                   name="first"
                   type="text"
@@ -50,6 +63,7 @@
                 <label>Nom</label>
                 <input
                   for="last"
+                  tabindex="2"
                   id="last"
                   name="last"
                   type="text"
@@ -62,6 +76,7 @@
                 <label>Email</label>
                 <input
                   for="email"
+                  tabindex="2"
                   id="email"
                   name="email"
                   type="email"
@@ -73,6 +88,7 @@
                 <label>Votre message</label>
                 <input
                   for="textarea"
+                  tabindex="2"
                   id="textarea"
                   name="textarea"
                   type="text"
@@ -81,7 +97,9 @@
                 <span></span>
               </div>
             </div>
-            <button type="submit" class="contact_button">Envoyer</button>
+            <button type="submit" tabindex="2" class="contact_button">
+              Envoyer
+            </button>
           </form>
         </div>
       </div>
@@ -121,11 +139,13 @@
           id="rightarrow"
           class="fa-solid fa-arrow-right droite"
           alt="right button"
+          tabindex="-1"
         ></i>
         <i
           id="leftarrow"
           class="fa-solid fa-arrow-left gauche"
           alt="left button"
+          tabindex="-1"
         ></i>
       </section>
     </main>

@@ -24,7 +24,7 @@ async function init() {
   const photographer = await getPhotographer();
   console.log(photographer);
   displayData(photographer.photographers);
-  displayDataMedia(photographer.media);
+  displayDataMedia(photographer.media, photographer);
 }
 
 // Fonction qui fait appraitre les photographes
@@ -36,10 +36,10 @@ function displayData(photographer) {
 }
 
 // Fonction qui fait appraitre les médias
-function displayDataMedia(medias) {
+function displayDataMedia(medias, photographer) {
   const mediaslist = document.querySelector(".photographer_media");
   Array.from(medias).forEach((media) => {
-    const mediaModel = mediaFactory(media);
+    const mediaModel = mediaFactory(media, photographer);
     const displaymedia = mediaModel.getUserMedia();
     mediaslist.appendChild(displaymedia);
   });

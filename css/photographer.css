@@ -92,6 +92,20 @@ form textarea {
   font-size: 36px;
 }
 
+.closemodal {
+  width: 60px;
+  position: fixed;
+  z-index: 11;
+  color: #901c1c;
+  font-size: 45px;
+  top: 6%;
+  right: 30%;
+  border: none;
+  font-family: Arial, Helvetica, sans-serif;
+  background: none;
+  cursor: pointer;
+}
+
 /* BANNER PHOTOGRAPHER */
 
 #body-photographer {

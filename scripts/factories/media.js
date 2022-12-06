@@ -1,4 +1,5 @@
-function mediaFactory(mediaData) {
+function mediaFactory(mediaData, photographer) {
+  let mediaArray = [];
   const { price, likes, image, video, title, date, id } = mediaData;
 
   const mediaImage = `assets/photographers/medias/${image}`;
@@ -7,6 +8,12 @@ function mediaFactory(mediaData) {
   const dates = `${date}`;
   const titles = `${title}`;
   const mediaId = `${id}`;
+  // console.log(mediaData);
+  console.log(JSON.stringify(photographer.media));
+  console.log(typeof mediaData);
+  mediaArray.push(mediaData);
+
+  console.log(JSON.stringify(mediaArray) + " array of media ");
 
   function getUserMedia() {
     const mediaContainer = document.createElement("div");
@@ -32,9 +39,6 @@ function mediaFactory(mediaData) {
       video.setAttribute("controls", "");
       video.setAttribute("class", "media_image");
       video.setAttribute("src", mediaVideo);
-      video.setAttribute("tabindex", 6);
-      video.controls = true;
-      video.setAttribute("alt", `${title}`);
       const source = document.createElement("source");
       source.setAttribute("src", mediaVideo);
       source.setAttribute("type", "video/mp4");
@@ -49,18 +53,10 @@ function mediaFactory(mediaData) {
       image.setAttribute("class", "media_image");
       image.setAttribute("src", mediaImage);
       image.setAttribute("media-id", mediaId);
-      image.setAttribute("alt", `${title}`);
 
       mediaContainer.append(mediaLink, image, mediaDescription);
       mediaLink.append(image);
     }
-
-    // keyboard accessiblity
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        video.paused ? video.play() : video.pause();
-      }
-    });
 
     // Lightbox
     const lightbox = document.getElementById("lightbox");
@@ -68,9 +64,6 @@ function mediaFactory(mediaData) {
     const closeBtn = document.querySelector("#close");
     const mediaImg = document.createElement("img");
     const mediaVid = document.createElement("video");
-    const previousBtn = document.querySelector(".gauche");
-    const nextBtn = document.querySelector(".droite");
-    const modalBg = document.getElementById("contact_modal");
 
     mediaVid.setAttribute("controls", "");
 
@@ -94,6 +87,7 @@ function mediaFactory(mediaData) {
     };
 
     function openLightbox(media) {
+      console.log(media.image);
       lightbox.style.display = "block";
       lightbox.append(media);
     }
@@ -103,57 +97,50 @@ function mediaFactory(mediaData) {
       lightbox.innerHTML = "";
     }
 
-    document.onkeyup = (e) => {
-      switch (e.key) {
-        case "Escape":
-          // Close contactForm & lightbox
-          document.querySelectorAll(".modal").forEach(() => {
-            modalBg.style.display = "none";
-            document.getElementById("lightbox").style.display = "none";
-            lightbox.innerHTML = "";
-          });
-          break;
-      }
-    };
-
-    // left & right arrows keys
-    function checkKey(e) {
-      e = e || window.event;
-
-      if (e.keyCode == "37" && lightbox.style.display == "flex") {
-        e.preventDefault();
-        document.getElementById("leftarrow").click();
-        // left arrow
-      } else if (e.keyCode == "39" && lightbox.style.display == "flex") {
-        document.getElementById("rightarrow").click();
-        // right arrow
-      }
-    }
-
     // Next and previous button
+    const previousBtn = document.querySelector(".gauche");
+    const nextBtn = document.querySelector(".droite");
+
     previousBtn.onclick = (event) => {
       const media = event.target.nextElementSibling.querySelector("[media-id]");
       console.log(media);
-      const actualMediaIndex = window.photographers.mediaData.findIndex(
+      const actualMediaIndex = photographers.media.findIndex(
         ({ id }) => id == media.getAttribute("media-id")
       );
       console.log(actualMediaIndex);
       let previousMediaIndex = actualMediaIndex - 1;
       if (previousMediaIndex < 0)
-        previousMediaIndex = window.photographers.media.length - 1;
+        previousMediaIndex = photographers.media.length - 1;
     };
 
     // right arrow event : next media onclick
     nextBtn.onclick = (event) => {
-      const media =
-        event.target.previousElementSibling.querySelector("[media-id]");
-      const actualMediaIndex = window.photographer.mediaData.findIndex(
+      const media = document.querySelector("[media-id]");
+      console.log(media.getAttribute("media-id"));
+      console.log(
+        JSON.stringify(photographer.media) +
+          "photograhper  " +
+          typeof photographer
+      );
+      const actualMediaIndex = photographer.media.findIndex(
         ({ id }) => id == media.getAttribute("media-id")
+        //
       );
 
+      const mediaImg = document.createElement("img");
+      mediaImg.setAttribute(
+        "src",
+        "assets/photographers/medias/" + photographer.media[3].image
+      );
+      mediaImg.setAttribute("class", "medias");
+
+      openLightbox(mediaImg);
+
+      console.log(actualMediaIndex + "actual ");
       let nextMediaIndex = actualMediaIndex + 1;
-      if (nextMediaIndex >= window.photographer.medias.length)
-        nextMediaIndex = 0;
+
+      console.log(nextMediaIndex);
+      if (nextMediaIndex >= photographer.media.length) nextMediaIndex = 0;
     };
 
     // let i = 0; // Current image index
@@ -209,5 +196,7 @@ function mediaFactory(mediaData) {
     return mediaContainer;
   }
 
-  return { getUserMedia };
+  return {
+    getUserMedia,
+  };
 }

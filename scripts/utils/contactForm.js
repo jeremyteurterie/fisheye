@@ -118,6 +118,15 @@ inputs.forEach((input) => {
   });
 });
 
+function closeModal() {
+  modalBg.style.display = "none";
+}
+
+// Clavier
+modalBg.onkeydown = function (event) {
+  if (event.key === "Escape") closeModal();
+};
+
 // Fonction pour vérifier l'envoi du formulaire
 form.addEventListener("submit", (e) => {
   console.log("test");
@@ -140,14 +149,3 @@ form.addEventListener("submit", (e) => {
     alert("Veuillez remplir correctement les champs");
   }
 });
-
-function closeModal() {
-  modalBg.style.display = "none";
-}
-
-// Clavier
-modalBg.onkeydown = function (event) {
-  if (event.key === "Escape") closeModal();
-};
-
-// closeModalBtn.addEventListener("click", closeModal);

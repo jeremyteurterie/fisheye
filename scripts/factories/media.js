@@ -52,7 +52,7 @@ function mediaFactory(mediaData, photographer) {
       const image = document.createElement("img");
       image.setAttribute("class", "media_image");
       image.setAttribute("src", mediaImage);
-      image.setAttribute("media-id", mediaId);
+      image.setAttribute("mediaId", mediaId);
 
       mediaContainer.append(mediaLink, image, mediaDescription);
       mediaLink.append(image);
@@ -69,7 +69,8 @@ function mediaFactory(mediaData, photographer) {
 
     mediaImg.setAttribute("src", mediaImage);
     mediaImg.setAttribute("class", "medias");
-    mediaImg.setAttribute("media-id", mediaId);
+    mediaImg.setAttribute("mediaId", mediaId);
+    mediaImg.setAttribute("id", "lightboxMedia");
     mediaVid.setAttribute("src", mediaVideo);
 
     mediaLightbox.setAttribute("id", "mediaLightbox");
@@ -97,69 +98,62 @@ function mediaFactory(mediaData, photographer) {
       lightbox.innerHTML = "";
     }
 
-    // Next and previous button
+    // variables previous & next button
     const previousBtn = document.querySelector(".gauche");
     const nextBtn = document.querySelector(".droite");
 
+    // left arrow event : previous media onclick
     previousBtn.onclick = (event) => {
-      const media = event.target.nextElementSibling.querySelector("[media-id]");
-      console.log(media);
-      const actualMediaIndex = photographers.media.findIndex(
-        ({ id }) => id == media.getAttribute("media-id")
+      const media = document
+        .querySelector("#lightbox")
+        .querySelector("#lightboxMedia");
+      const actualMediaIndex = photographer.media.findIndex(
+        ({ id }) => id == media.getAttribute("mediaId")
+        //
       );
-      console.log(actualMediaIndex);
+
       let previousMediaIndex = actualMediaIndex - 1;
-      if (previousMediaIndex < 0)
-        previousMediaIndex = photographers.media.length - 1;
+
+      if (previousMediaIndex > photographer.media.length) {
+        previousMediaIndex = 0;
+        media.src =
+          "assets/photographers/medias/" + photographer.media[0].image;
+        media.setAttribute("mediaid", photographer.media[0].id);
+      } else {
+        media.src =
+          "assets/photographers/medias/" +
+          photographer.media[previousMediaIndex].image;
+        media.setAttribute(
+          "mediaid",
+          photographer.media[previousMediaIndex].id
+        );
+      }
     };
 
     // right arrow event : next media onclick
     nextBtn.onclick = (event) => {
-      const media = document.querySelector("[media-id]");
-      console.log(media.getAttribute("media-id"));
-      console.log(
-        JSON.stringify(photographer.media) +
-          "photograhper  " +
-          typeof photographer
-      );
+      const media = document
+        .querySelector("#lightbox")
+        .querySelector("#lightboxMedia");
       const actualMediaIndex = photographer.media.findIndex(
-        ({ id }) => id == media.getAttribute("media-id")
+        ({ id }) => id == media.getAttribute("mediaId")
         //
       );
 
-      const mediaImg = document.createElement("img");
-      mediaImg.setAttribute(
-        "src",
-        "assets/photographers/medias/" + photographer.media[3].image
-      );
-      mediaImg.setAttribute("class", "medias");
-
-      openLightbox(mediaImg);
-
-      console.log(actualMediaIndex + "actual ");
       let nextMediaIndex = actualMediaIndex + 1;
 
-      console.log(nextMediaIndex);
-      if (nextMediaIndex >= photographer.media.length) nextMediaIndex = 0;
+      if (nextMediaIndex > photographer.media.length) {
+        nextMediaIndex = 0;
+        media.src =
+          "assets/photographers/medias/" + photographer.media[0].image;
+        media.setAttribute("mediaid", photographer.media[0].id);
+      } else {
+        media.src =
+          "assets/photographers/medias/" +
+          photographer.media[nextMediaIndex].image;
+        media.setAttribute("mediaid", photographer.media[nextMediaIndex].id);
+      }
     };
-
-    // let i = 0; // Current image index
-
-    // previousBtn.addEventListener("click", () => {
-    //   if (i <= 0) i = mediaImage.length;
-    //   i--;
-    //   return setImg();
-    // });
-
-    // nextBtn.addEventListener("click", () => {
-    //   if (i >= mediaImage.length - 1) i = -1;
-    //   i++;
-    //   return setImg();
-    // });
-
-    // function setImg() {
-    //   return mediaImg.setAttribute("src", "mediaImg" + mediaImg[i]);
-    // }
 
     mediaDescription.setAttribute("class", "media_description");
     mediaTitle.setAttribute("class", "media_title");

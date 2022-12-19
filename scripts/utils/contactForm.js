@@ -122,10 +122,12 @@ function closeModal() {
   modalBg.style.display = "none";
 }
 
-// Clavier
-modalBg.onkeydown = function (event) {
-  if (event.key === "Escape") closeModal();
-};
+// Keyboard
+document.addEventListener("keyup", (e) => {
+  if (e.key === "Escape") {
+    closeModal();
+  }
+});
 
 // Fonction pour vérifier l'envoi du formulaire
 form.addEventListener("submit", (e) => {

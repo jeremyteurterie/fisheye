@@ -1,9 +1,9 @@
-function photographerFactory(data) {
+function photographerFactory (data) {
   const { name, portrait, city, country, id, price, tagline } = data;
 
   const picture = `assets/photographers/${portrait}`;
 
-  function getUserCardDOM() {
+  function getUserCardDOM () {
     const article = document.createElement("article");
     const img = document.createElement("img");
     const h2 = document.createElement("h2");
@@ -36,14 +36,14 @@ function photographerFactory(data) {
     return article, link;
   }
 
-  function getPhotographerProfil() {
+  function getPhotographerProfil () {
     const identity = document.createElement("article");
     const div = document.createElement("div");
     const nom = document.createElement("h2");
     const location = document.createElement("h3");
     const tag = document.createElement("h4");
     const image = document.createElement("img");
-    const icon = `assets/icons/heart.png`;
+    const icon = "assets/icons/heart.png";
     const modalButton = document.createElement("button");
 
     // Encart likes + prix des pages photographes.

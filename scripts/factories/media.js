@@ -1,5 +1,5 @@
-function mediaFactory(mediaData, photographer) {
-  let mediaArray = [];
+function mediaFactory (mediaData, photographer) {
+  const mediaArray = [];
   const { price, likes, image, video, title, date, id } = mediaData;
 
   const mediaImage = `assets/photographers/medias/${image}`;
@@ -11,7 +11,7 @@ function mediaFactory(mediaData, photographer) {
 
   mediaArray.push(mediaData);
 
-  function getUserMedia() {
+  function getUserMedia () {
     const mediaContainer = document.createElement("div");
     const mediaDescription = document.createElement("p");
     const mediaTitle = document.createElement("h2");
@@ -19,7 +19,7 @@ function mediaFactory(mediaData, photographer) {
     const mediaPrice = document.createElement("h4");
     const mediaLikesButton = document.createElement("button");
     const mediaLikesButtonImage = document.createElement("img");
-    const icon = `assets/icons/heart.svg`;
+    const icon = "assets/icons/heart.svg";
     const mediaLikesContainer = document.createElement("div");
     const mediaLink = document.createElement("a");
 
@@ -30,7 +30,7 @@ function mediaFactory(mediaData, photographer) {
 
     // Pop method for media
     // In MP4 case
-    if (mediaVideo.split(".").pop() == "mp4") {
+    if (mediaVideo.split(".").pop() === "mp4") {
       const video = document.createElement("video");
       video.setAttribute("controls", "");
       video.setAttribute("class", "media_image");
@@ -44,7 +44,7 @@ function mediaFactory(mediaData, photographer) {
       mediaLink.append(video);
     }
     // In JPG case
-    if (mediaImage.split(".").pop() == "jpg") {
+    if (mediaImage.split(".").pop() === "jpg") {
       const image = document.createElement("img");
       image.setAttribute("class", "media_image");
       image.setAttribute("src", mediaImage);
@@ -83,7 +83,7 @@ function mediaFactory(mediaData, photographer) {
       closeLightbox();
     };
 
-    function openLightbox(media) {
+    function openLightbox (media) {
       lightbox.style.display = "block";
       lightbox.append(media);
     }
@@ -96,14 +96,14 @@ function mediaFactory(mediaData, photographer) {
     const previousBtn = document.querySelector(".gauche");
     const nextBtn = document.querySelector(".droite");
 
-    function previousMedia() {
+    function previousMedia () {
       // left arrow event : previous media onclick
       previousBtn.onclick = (event) => {
         const media = document
           .querySelector("#lightbox")
           .querySelector("#lightboxMedia");
         const actualMediaIndex = photographer.media.findIndex(
-          ({ id }) => id == media.getAttribute("mediaId")
+          ({ id }) => id === media.getAttribute("mediaId")
           //
         );
 
@@ -126,14 +126,14 @@ function mediaFactory(mediaData, photographer) {
       };
     }
 
-    function nextMedia() {
+    function nextMedia () {
       // right arrow event : next media onclick
       nextBtn.onclick = (event) => {
         const media = document
           .querySelector("#lightbox")
           .querySelector("#lightboxMedia");
         const actualMediaIndex = photographer.media.findIndex(
-          ({ id }) => id == media.getAttribute("mediaId")
+          ({ id }) => id === media.getAttribute("mediaId")
           //
         );
 
@@ -191,7 +191,7 @@ function mediaFactory(mediaData, photographer) {
     mediaLikesButton.appendChild(mediaLikesButtonImage);
 
     // Ajout d'un like pour chaque média lorsque l'utilisateur clique sur le bouton
-    function increaseLikes() {
+    function increaseLikes () {
       let count = like;
       count++;
       mediaLikes.innerText = count;

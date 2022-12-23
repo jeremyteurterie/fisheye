@@ -8,12 +8,8 @@ function mediaFactory(mediaData, photographer) {
   const dates = `${date}`;
   const titles = `${title}`;
   const mediaId = `${id}`;
-  // console.log(mediaData);
-  console.log(JSON.stringify(photographer.media));
-  console.log(typeof mediaData);
-  mediaArray.push(mediaData);
 
-  console.log(JSON.stringify(mediaArray) + " array of media ");
+  mediaArray.push(mediaData);
 
   function getUserMedia() {
     const mediaContainer = document.createElement("div");
@@ -88,7 +84,6 @@ function mediaFactory(mediaData, photographer) {
     };
 
     function openLightbox(media) {
-      console.log(media.image);
       lightbox.style.display = "block";
       lightbox.append(media);
     }
@@ -131,37 +126,42 @@ function mediaFactory(mediaData, photographer) {
       };
     }
 
-    // right arrow event : next media onclick
-    nextBtn.onclick = (event) => {
-      const media = document
-        .querySelector("#lightbox")
-        .querySelector("#lightboxMedia");
-      const actualMediaIndex = photographer.media.findIndex(
-        ({ id }) => id == media.getAttribute("mediaId")
-        //
-      );
+    function nextMedia() {
+      // right arrow event : next media onclick
+      nextBtn.onclick = (event) => {
+        const media = document
+          .querySelector("#lightbox")
+          .querySelector("#lightboxMedia");
+        const actualMediaIndex = photographer.media.findIndex(
+          ({ id }) => id == media.getAttribute("mediaId")
+          //
+        );
 
-      let nextMediaIndex = actualMediaIndex + 1;
+        let nextMediaIndex = actualMediaIndex + 1;
 
-      if (nextMediaIndex > photographer.media.length) {
-        nextMediaIndex = 0;
-        media.src =
-          "assets/photographers/medias/" + photographer.media[0].image;
-        media.setAttribute("mediaid", photographer.media[0].id);
-      } else {
-        media.src =
-          "assets/photographers/medias/" +
-          photographer.media[nextMediaIndex].image;
-        media.setAttribute("mediaid", photographer.media[nextMediaIndex].id);
-      }
-    };
+        if (nextMediaIndex > photographer.media.length) {
+          nextMediaIndex = 0;
+          media.src =
+            "assets/photographers/medias/" + photographer.media[0].image;
+          media.setAttribute("mediaid", photographer.media[0].id);
+        } else {
+          media.src =
+            "assets/photographers/medias/" +
+            photographer.media[nextMediaIndex].image;
+          media.setAttribute("mediaid", photographer.media[nextMediaIndex].id);
+        }
+      };
+    }
 
-    // listen to the keyboard keys on the lightbox
+    previousMedia();
+    nextMedia();
+
     document.addEventListener("keyup", (e) => {
       if (e.key === "Escape") {
         closeLightbox();
       }
       if (e.key === "ArrowRight") {
+        nextMedia();
       }
       if (e.key === "ArrowLeft") {
         previousMedia();
@@ -171,6 +171,7 @@ function mediaFactory(mediaData, photographer) {
     mediaDescription.setAttribute("class", "media_description");
     mediaTitle.setAttribute("class", "media_title");
     mediaTitle.textContent = `${title}`;
+
     mediaLikesContainer.setAttribute("class", "media_likescontainer");
     mediaLikes.setAttribute("class", "media_likes");
     mediaLikes.textContent = `${likes}`;
@@ -199,8 +200,6 @@ function mediaFactory(mediaData, photographer) {
     }
 
     mediaLikesButton.addEventListener("click", increaseLikes);
-
-    previousMedia();
 
     return mediaContainer;
   }

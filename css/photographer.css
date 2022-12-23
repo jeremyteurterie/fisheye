@@ -445,13 +445,14 @@ nav > ul > li:hover > a {
   display: flex;
   height: auto;
   width: 450px;
-  padding-top: 35px;
-  padding-right: 125px;
   object-fit: cover;
   border-radius: 5px;
   justify-content: center;
   z-index: 11;
   margin: auto;
+  position: fixed;
+  top: 20%;
+  left: 38%;
 }
 
 .droite,

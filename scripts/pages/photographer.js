@@ -1,4 +1,4 @@
-async function getPhotographer () {
+async function getPhotographer() {
   // const id = window.location.search.split("id=")[1];
 
   const params = new URLSearchParams(window.location.search);
@@ -19,7 +19,7 @@ async function getPhotographer () {
   return photographers;
 }
 
-async function init () {
+async function init() {
   // Récupère les datas des photographes
   const photographer = await getPhotographer();
   console.log(photographer);
@@ -28,7 +28,7 @@ async function init () {
 }
 
 // Fonction qui fait appraitre les photographes
-function displayData (photographer) {
+function displayData(photographer) {
   const photographersSection = document.getElementById("photographeInfos");
   const profileModel = photographerFactory(photographer);
   const profiles = profileModel.getPhotographerProfil();
@@ -36,7 +36,7 @@ function displayData (photographer) {
 }
 
 // Fonction qui fait appraitre les médias
-function displayDataMedia (medias, photographer) {
+function displayDataMedia(medias, photographer) {
   const mediaslist = document.querySelector(".photographer_media");
   Array.from(medias).forEach((media) => {
     const mediaModel = mediaFactory(media, photographer);
@@ -50,7 +50,6 @@ function displayDataMedia (medias, photographer) {
   const displaylikes = medias.map((media) => {
     totalLike += media.likes;
     document.querySelector("#totalLike").innerHTML = totalLike;
-    return displaylikes;
   });
 }
 

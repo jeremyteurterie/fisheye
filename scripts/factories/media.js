@@ -63,8 +63,6 @@ function mediaFactory(mediaData, photographer) {
     const mediaImg = document.createElement("img");
     const mediaVid = document.createElement("video");
 
-    mediaVid.setAttribute("controls", "");
-
     mediaImg.setAttribute("src", mediaImage);
     mediaImg.setAttribute("class", "medias");
     mediaImg.setAttribute("mediaId", mediaId);
@@ -257,6 +255,7 @@ function mediaFactory(mediaData, photographer) {
     mediaLikesButton.addEventListener("click", increaseLikes);
 
     previousMedia();
+    nextMedia();
 
     return mediaContainer;
   }

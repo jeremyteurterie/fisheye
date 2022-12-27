@@ -86,7 +86,6 @@ function mediaFactory(mediaData, photographer) {
     };
 
     function openLightbox(media) {
-      console.log(media.image);
       lightbox.style.display = "block";
       lightbox.append(media);
     }

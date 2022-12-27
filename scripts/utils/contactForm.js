@@ -9,8 +9,6 @@ const inputs = document.querySelectorAll(
 
 let first, last, email, textarea;
 
-console.log(inputs);
-
 const addGlobalEventListener = (type, selector, callback, options) => {
   document.addEventListener(
     type,
@@ -22,7 +20,6 @@ const addGlobalEventListener = (type, selector, callback, options) => {
 };
 
 addGlobalEventListener("click", "#displayModal", (event) => {
-  console.log("Clicked Button");
   displayModal(event);
 });
 
@@ -46,9 +43,8 @@ const errorDisplay = (tag, message, valid) => {
 
 // Vérification des inputs
 const firstChecker = (value) => {
-  console.log(value);
   if (value.length > 0 && (value.length < 3 || value.length > 20)) {
-    errorDisplay("first", "Le pseudo doit faire entre 3 et 20 caractères");
+    errorDisplay("first", "Le prénom doit faire entre 3 et 20 caractères");
   } else if (!value.match(/^[a-zA-Z0-9_.-]*$/)) {
     errorDisplay(
       "first",
@@ -61,10 +57,17 @@ const firstChecker = (value) => {
   }
 };
 
+const emailChecker = (value) => {
+  if (!value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+    email = null;
+  } else {
+    email = true;
+  }
+};
+
 const lastChecker = (value) => {
-  console.log(value);
   if (value.length > 0 && (value.length < 3 || value.length > 20)) {
-    errorDisplay("last", "Le pseudo doit faire entre 3 et 20 caractères");
+    errorDisplay("last", "Le nom doit faire entre 3 et 20 caractères");
     pseudo = null;
   } else if (!value.match(/^[a-zA-Z0-9_.-]*$/)) {
     errorDisplay("last", "Le nom ne doit pas contenir de caractères spéciaux");
@@ -75,19 +78,7 @@ const lastChecker = (value) => {
   }
 };
 
-const emailChecker = (value) => {
-  console.log(value);
-  if (!value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
-    errorDisplay("email", "Le mail n'est pas valide");
-    email = null;
-  } else {
-    errorDisplay("email", "", true);
-    email = true;
-  }
-};
-
 const textareaChecker = (value) => {
-  console.log(value);
   if (value.length === 0) {
     errorDisplay("textarea", "Le message ne peut pas être vide");
     textarea = null;
@@ -131,23 +122,20 @@ document.addEventListener("keyup", (e) => {
 
 // Fonction pour vérifier l'envoi du formulaire
 form.addEventListener("submit", (e) => {
-  console.log("test");
   if (first && last && email && textarea) {
-    const data = {
-      first,
-      last,
-      email,
-      textarea,
-    };
+    e.preventDefault();
+    const formData = new FormData(form);
+
+    const data = {};
+    for (const [key, value] of formData) {
+      data[key] = value;
+    }
     console.log(data);
 
     inputs.forEach((input) => (input.value = ""));
-
-    first = null;
-    last = null;
-    email = null;
-    main.style.display = "block";
+    modalBg.style.display = "none";
   } else {
     alert("Veuillez remplir correctement les champs");
+    e.preventDefault();
   }
 });

@@ -1,9 +1,6 @@
 async function getPhotographer() {
-  // const id = window.location.search.split("id=")[1];
-
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
-  console.log(id);
 
   const photographers = await fetch("./data/photographers.json").then(
     (response) => response.json()
@@ -22,7 +19,6 @@ async function getPhotographer() {
 async function init() {
   // Récupère les datas des photographes
   const photographer = await getPhotographer();
-  console.log(photographer);
   displayData(photographer.photographers);
   displayDataMedia(photographer.media, photographer);
 }

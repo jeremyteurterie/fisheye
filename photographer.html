@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8" />
@@ -48,51 +48,44 @@
           <form novalidate>
             <div>
               <div class="first-container">
-                <label>Prénom</label>
+                <label for="first">Prénom</label>
                 <input
-                  for="first"
                   tabindex="2"
                   id="first"
                   name="first"
                   type="text"
                   minlength="2"
+                  aria-label="champ prénom"
                   required
                 />
                 <span></span>
               </div>
               <div class="last-container">
-                <label>Nom</label>
-                <input
-                  for="last"
-                  tabindex="2"
-                  id="last"
-                  name="last"
-                  type="text"
-                  minlength="2"
-                  required
-                />
+                <label for="last">Nom</label>
+                <input tabindex="2" id="last" name="last" type="text"
+                minlength="2" aria-label="champ nom required />
                 <span></span>
               </div>
               <div class="email-container">
-                <label>Email</label>
+                <label for="email">Email</label>
                 <input
-                  for="email"
                   tabindex="2"
                   id="email"
                   name="email"
                   type="email"
+                  aria-label="champ email"
                   required
                 />
                 <span></span>
               </div>
               <div class="textarea-container">
-                <label>Votre message</label>
+                <label for="textarea">Votre message</label>
                 <input
-                  for="textarea"
                   tabindex="2"
                   id="textarea"
                   name="textarea"
                   type="text"
+                  aria-label="champ message"
                   required
                 />
                 <span></span>
@@ -113,8 +106,10 @@
         <div class="sort-choice"></div>
         <span> Trier par </span>
         <select
+          title="tri"
           name="sorter"
           id="sort-choice"
+          aria-label="trie des medias"
           onchange="mediasSort(this.value)"
         >
           <option value="popularite" aria-label="Tri popularité">
@@ -135,21 +130,21 @@
         aria-hidden="true"
         tabindex="2"
       >
-        <i id="close" class="fa-solid fa-xmark" alt="close button"></i>
-        <i
+        <em id="close" class="fa-solid fa-xmark" alt="close button"></em>
+        <em
           id="rightarrow"
-          aria-label="image précéde,nte"
+          aria-label="image précédente"
           class="fa-solid fa-arrow-right droite"
           alt="right button"
           tabindex="2"
-        ></i>
-        <i
+        ></em>
+        <em
           id="leftarrow"
           aria-label="image suivante"
           class="fa-solid fa-arrow-left gauche"
           alt="left button"
           tabindex="2"
-        ></i>
+        ></em>
       </section>
     </main>
   </body>

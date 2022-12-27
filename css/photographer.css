@@ -479,7 +479,7 @@ nav > ul > li:hover > a {
   font-size: 50px;
 }
 
-i {
+em {
   width: 20px;
   position: fixed;
   z-index: 11;
